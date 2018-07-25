@@ -2,6 +2,8 @@
 
 A project for comparing the efficiency of different heap implementations.
 
+__Documentation:__
+
 [Project Definition](https://github.com/maarila/four-heaps/blob/master/documentation/ProjectDefinition.md)
 
 __Weekly reports:__
