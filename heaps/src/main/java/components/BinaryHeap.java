@@ -24,7 +24,7 @@ public class BinaryHeap {
      */
     public BinaryHeap(int heapSize) {
         this.heap = new int[heapSize];
-        this.heapSize = heapSize;
+        this.heapSize = 0;
     }
 
     /**
@@ -146,8 +146,8 @@ public class BinaryHeap {
      * Increases the value of the key in the given node index.
      * 
      * @param index the index of the node for which the value of the key is to
-     *              be increased
-     * @param newKey the new value of the key
+     *              be increased.
+     * @param newKey the new value of the key.
      */
     public void increaseKey(int index, int newKey) {
         if (newKey > this.heap[index]) {
@@ -165,8 +165,8 @@ public class BinaryHeap {
      * Decreases the value of the key in the given node index.
      * 
      * @param index the index of the node for which the value of the key is to
-     *              be decreased
-     * @param newKey the new value of the key
+     *              be decreased.
+     * @param newKey the new value of the key.
      */
     public void decreaseKey(int index, int newKey) {
         if (newKey < this.heap[index]) {
@@ -187,5 +187,41 @@ public class BinaryHeap {
         }
         
         this.heap = newHeap;        
+    }
+    
+    /**
+     * Returns the information whether the heap is empty or not.
+     * 
+     * @return true or false depending on the state of the heap.
+     */
+    public boolean isEmpty() {
+        return this.heapSize == 0;
+    }
+
+    /**
+     * Returns the heap as an integer array.
+     * 
+     * @return array containing the heap.
+     */
+    public int[] getHeap() {
+        return heap;
+    }
+
+    /**
+     * Set an integer array to act as the current heap.
+     * 
+     * @param heap the new integer array 
+     */
+    public void setHeap(int[] heap) {
+        this.heap = heap;
+    }
+
+    /**
+     * Returns the current size of the heap.
+     * 
+     * @return size of heap.
+     */
+    public int getHeapSize() {
+        return heapSize;
     }
 }
