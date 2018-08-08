@@ -108,7 +108,7 @@ public class BinaryHeap {
     /**
      * Fixes the heap if it is broken at the given index - "broken" meaning
      * that the key at the given index is smaller than either of its children. 
-     * The fixing procedureis continued iteratively downwards until the heap is 
+     * The fixing procedure is continued iteratively downwards until the heap is
      * no longer broken.
      * 
      * @param heap the heap to be fixed.
