@@ -12,4 +12,5 @@ __Weekly reports:__
 
 * [Week 1](https://github.com/maarila/four-heaps/blob/master/documentation/WeekReport1.md)
 * [Week 2](https://github.com/maarila/four-heaps/blob/master/documentation/WeekReport2.md)
+* [Week 3](https://github.com/maarila/four-heaps/blob/master/documentation/WeekReport3.md)
 

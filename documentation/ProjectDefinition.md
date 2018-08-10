@@ -33,7 +33,9 @@ The time complexities given above are all based on the summary of running times 
 
 ### Sources:
 
-Cormen, T. H., Leiserson, C. E., Rivest, R. L. & Stein C. 2009. Introduction to Algorithms. The MIT Press.
+Cormen, T. H., Leiserson, C. E., Rivest, R. L. & Stein C. 2001. Introduction to Algorithms. Second Edition. The MIT Press.
+
+Cormen, T. H., Leiserson, C. E., Rivest, R. L. & Stein C. 2009. Introduction to Algorithms. Third Edition. The MIT Press.
 
 Kivinen, J. 2018. Tietorakenteet ja algoritmit. Course material.
 
