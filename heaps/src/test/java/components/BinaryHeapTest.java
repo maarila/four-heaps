@@ -23,7 +23,7 @@ public class BinaryHeapTest {
 
     @Test
     public void getHeapSizeReturnsZeroAtStart() {
-        assertEquals(this.heap.getHeapSize(), 0);
+        assertEquals(0, this.heap.getHeapSize());
     }
 
     @Test
@@ -31,12 +31,12 @@ public class BinaryHeapTest {
         this.heap.insert(1);
         this.heap.insert(2);
         this.heap.insert(3);
-        assertEquals(this.heap.getHeapSize(), 3);
+        assertEquals(3, this.heap.getHeapSize());
     }
 
     @Test
     public void sizeOfHeapEqualsSizeGivenToConstructor() {
-        assertEquals(this.heap.getHeap().length, 10);
+        assertEquals(10, this.heap.getHeap().length);
     }
 
     @Test
@@ -48,17 +48,17 @@ public class BinaryHeapTest {
     @Test
     public void heapMaxValueEqualsTheOnlyValue() {
         this.heap.insert(5);
-        assertEquals(this.heap.returnMax(), 5);
+        assertEquals(5, this.heap.returnMax());
     }
 
     @Test
     public void heapifyProcessesValuesSuccessfully() {
         this.heap.insert(5);
-        assertEquals(this.heap.returnMax(), 5);
+        assertEquals(5,this.heap.returnMax());
         this.heap.insert(10);
-        assertEquals(this.heap.returnMax(), 10);
+        assertEquals(10, this.heap.returnMax());
         this.heap.insert(8);
-        assertEquals(this.heap.returnMax(), 10);
+        assertEquals(10, this.heap.returnMax());
     }
 
     @Test
@@ -69,21 +69,21 @@ public class BinaryHeapTest {
         heapAsArray[2] = 25;
         this.heap.setHeap(heapAsArray);
         this.heap.heapify(this.heap.getHeap(), 10);
-        assertEquals(this.heap.returnMax(), 5);
+        assertEquals(5, this.heap.returnMax());
     }
 
     @Test
     public void increaseKeyWorksAsExpectedWhenGivenValueIsHigherThanOriginalValue() {
         this.heap.insert(5);
         this.heap.increaseKey(0, 10);
-        assertEquals(this.heap.returnMax(), 10);
+        assertEquals(10, this.heap.returnMax());
     }
 
     @Test
     public void increaseKeyDoesNothingWhenGivenValueIsLowerThanOriginalValue() {
         this.heap.insert(5);
         this.heap.increaseKey(0, 3);
-        assertEquals(this.heap.returnMax(), 5);
+        assertEquals(5, this.heap.returnMax());
     }
 
     @Test
@@ -95,9 +95,9 @@ public class BinaryHeapTest {
         this.heap.insert(60);
         this.heap.insert(65);
         this.heap.insert(10);
-        assertEquals(this.heap.returnMax(), 65);
+        assertEquals(65, this.heap.returnMax());
         this.heap.increaseKey(6, 100);
-        assertEquals(this.heap.returnMax(), 100);
+        assertEquals(100, this.heap.returnMax());
     }
 
     @Test
@@ -110,32 +110,32 @@ public class BinaryHeapTest {
         this.heap.setHeap(heapAsArray);
         this.heap.increaseKey(3, 20);
         heapAsArray = this.heap.getHeap();
-        assertEquals(heapAsArray[1], 20);
+        assertEquals(20, heapAsArray[1]);
     }
 
     @Test
     public void decreaseKeyWorksAsExpectedWhenGivenValueIsLowerThanOriginalValue() {
         this.heap.insert(10);
         this.heap.decreaseKey(0, 5);
-        assertEquals(this.heap.returnMax(), 5);
+        assertEquals(5, this.heap.returnMax());
     }
 
     @Test
     public void decreaseKeyDoesNothingWhenGivenValueIsHigherThanOriginalValue() {
         this.heap.insert(10);
         this.heap.decreaseKey(0, 15);
-        assertEquals(this.heap.returnMax(), 10);
+        assertEquals(10, this.heap.returnMax());
     }
 
     @Test
     public void heapSizeIsDoubledWhenNeeded() {
         BinaryHeap smallHeap = new BinaryHeap(3);
-        assertEquals(smallHeap.getHeap().length, 3);
+        assertEquals(3, smallHeap.getHeap().length);
         smallHeap.insert(10);
         smallHeap.insert(20);
         smallHeap.insert(30);
         smallHeap.insert(40);
-        assertEquals(smallHeap.getHeap().length, 6);
+        assertEquals(6, smallHeap.getHeap().length);
     }
 
     @Test
@@ -178,7 +178,7 @@ public class BinaryHeapTest {
         this.heap.insert(20);
         this.heap.insert(15);
         int deletedValue = this.heap.deleteMax();
-        assertEquals(deletedValue, 20);
+        assertEquals(20, deletedValue);
     }
 
     @Test
@@ -187,6 +187,6 @@ public class BinaryHeapTest {
         this.heap.insert(20);
         this.heap.insert(15);
         this.heap.deleteMax();
-        assertEquals(this.heap.returnMax(), 15);
+        assertEquals(15, this.heap.returnMax());
     }
 }
