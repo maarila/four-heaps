@@ -139,6 +139,40 @@ public class BinaryHeapTest {
     }
 
     @Test
+    public void heapSizeIsHalvedWhenNeeded() {
+        BinaryHeap smallHeap = new BinaryHeap(3);
+        smallHeap.insert(10);
+        smallHeap.insert(20);
+        smallHeap.insert(30);
+        smallHeap.insert(40);
+        assertEquals(6, smallHeap.getHeap().length);
+        smallHeap.deleteMax();
+        assertEquals(3, smallHeap.getHeap().length);
+    }
+
+    @Test
+    public void heapSizeIsNotHalvedWhenNotNeeded() {
+        BinaryHeap smallHeap = new BinaryHeap(3);
+        smallHeap.insert(10);
+        smallHeap.insert(20);
+        smallHeap.insert(30);
+        smallHeap.insert(40);
+        smallHeap.insert(50);
+        assertEquals(6, smallHeap.getHeap().length);
+        smallHeap.deleteMax();
+        assertEquals(6, smallHeap.getHeap().length);
+    }
+
+    @Test
+    public void heapSizeIsNotHalvedWhenSizeIsLessThanStartingSize() {
+        BinaryHeap smallHeap = new BinaryHeap(3);
+        assertEquals(3, smallHeap.getHeap().length);
+        smallHeap.insert(10);
+        smallHeap.deleteMax();
+        assertEquals(3, smallHeap.getHeap().length);
+    }
+
+    @Test
     public void deletingMaxValueReturnsTheCorrectValue() {
         this.heap.insert(10);
         this.heap.insert(20);

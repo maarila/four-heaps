@@ -4,10 +4,9 @@ package components;
  * This class provides the basic implementation of a binary heap. It will be
  * used as a point of comparison for other more uncommon implementations of the
  * heap data structure.
- * 
+ *
  * @author Mika Äärilä
  */
-
 public class BinaryHeap {
 
     /**
@@ -16,20 +15,22 @@ public class BinaryHeap {
      */
     private int[] heap;
     private int heapSize;
+    private final int startingSize;
 
     /**
      * Constructor for the binary heap.
-     * 
+     *
      * @param heapSize the starting size of the heap.
      */
     public BinaryHeap(int heapSize) {
         this.heap = new int[heapSize];
         this.heapSize = 0;
+        this.startingSize = heapSize;
     }
 
     /**
      * Returns the index of the parent of the current node.
-     * 
+     *
      * @param index the index of the current node.
      * @return the index of the parent node.
      */
@@ -39,7 +40,7 @@ public class BinaryHeap {
 
     /**
      * Returns the index of the left child node.
-     * 
+     *
      * @param index the index of the current node.
      * @return the index of the left child node.
      */
@@ -49,7 +50,7 @@ public class BinaryHeap {
 
     /**
      * Returns the index of the right child node.
-     * 
+     *
      * @param index the index of the current node.
      * @return the index of the right child node.
      */
@@ -59,18 +60,19 @@ public class BinaryHeap {
 
     /**
      * Returns the maximum value of the heap.
-     * 
+     *
      * @return the maximum value located on the first position of the array.
      */
     public int returnMax() {
         return this.heap[0];
     }
-    
+
     /**
      * Deletes the maximum value of the heap and returns it. At the same time
-     * subtracts one from the pointer at end of the heap and fixes the heap via the heapify
-     * operation.
-     * 
+     * subtracts one from the pointer at end of the heap and fixes the heap via
+     * the heapify operation. After deletion, if the size of the heap is double
+     * or more compared to heapSize, the size of the heap is halved.
+     *
      * @return the maximum value that was just deleted.
      */
     public int deleteMax() {
@@ -79,14 +81,18 @@ public class BinaryHeap {
         this.heapSize--;
         heapify(this.heap, 0);
 
+        if (this.heapSize <= this.heap.length / 2 && this.heapSize >= this.startingSize) {
+            decreaseHeapSize();
+        }
+
         return maxValue;
     }
 
     /**
-     * Inserts a new value into the heap. Also, adds one to the pointer at the 
+     * Inserts a new value into the heap. Also, adds one to the pointer at the
      * end of the heap and, if necessary, increases the size of the heap
      * (doubles it, to be more precise).
-     * 
+     *
      * @param newValue the value to be inserted into the heap.
      */
     public void insert(int newValue) {
@@ -94,7 +100,7 @@ public class BinaryHeap {
         if (this.heapSize >= this.heap.length) {
             increaseHeapSize();
         }
-        
+
         int index = this.heapSize - 1;
 
         while (index > 0 && this.heap[parent(index)] < newValue) {
@@ -104,13 +110,13 @@ public class BinaryHeap {
 
         this.heap[index] = newValue;
     }
-    
+
     /**
-     * Fixes the heap if it is broken at the given index - "broken" meaning
-     * that the key at the given index is smaller than either of its children. 
-     * The fixing procedure is continued iteratively downwards until the heap is
-     * no longer broken.
-     * 
+     * Fixes the heap if it is broken at the given index - "broken" meaning that
+     * the key at the given index is smaller than either of its children. The
+     * fixing procedure is continued iteratively downwards until the heap is no
+     * longer broken.
+     *
      * @param heap the heap to be fixed.
      * @param index the index of the node to be checked.
      */
@@ -141,10 +147,10 @@ public class BinaryHeap {
             index = largest;
         }
     }
-    
+
     /**
      * Increases the value of the key in the given node index.
-     * 
+     *
      * @param index the index of the node for which the value of the key is to
      *              be increased.
      * @param newKey the new value of the key.
@@ -160,10 +166,10 @@ public class BinaryHeap {
             }
         }
     }
-    
+
     /**
      * Decreases the value of the key in the given node index.
-     * 
+     *
      * @param index the index of the node for which the value of the key is to
      *              be decreased.
      * @param newKey the new value of the key.
@@ -174,24 +180,38 @@ public class BinaryHeap {
             heapify(this.heap, index);
         }
     }
-    
+
     /**
      * Doubles the size of the heap whenever the current size is not adequate
      * for inserting new nodes.
      */
     public void increaseHeapSize() {
         int[] newHeap = new int[this.heap.length * 2];
-        
+
         for (int i = 0; i < this.heap.length; i++) {
             newHeap[i] = this.heap[i];
         }
-        
-        this.heap = newHeap;        
+
+        this.heap = newHeap;
     }
-    
+
+    /**
+     * Halves the size of the heap whenever the current size is double or more
+     * compared to the heapSize pointer.
+     */
+    public void decreaseHeapSize() {
+        int[] newHeap = new int[this.heap.length / 2];
+
+        for (int i = 0; i < this.heapSize; i++) {
+            newHeap[i] = this.heap[i];
+        }
+
+        this.heap = newHeap;
+    }
+
     /**
      * Returns the information whether the heap is empty or not.
-     * 
+     *
      * @return true or false depending on the state of the heap.
      */
     public boolean isEmpty() {
@@ -200,7 +220,7 @@ public class BinaryHeap {
 
     /**
      * Returns the heap as an integer array.
-     * 
+     *
      * @return array containing the heap.
      */
     public int[] getHeap() {
@@ -209,8 +229,8 @@ public class BinaryHeap {
 
     /**
      * Set an integer array to act as the current heap.
-     * 
-     * @param heap the new integer array 
+     *
+     * @param heap the new integer array.
      */
     public void setHeap(int[] heap) {
         this.heap = heap;
@@ -218,7 +238,7 @@ public class BinaryHeap {
 
     /**
      * Returns the current size of the heap.
-     * 
+     *
      * @return size of heap.
      */
     public int getHeapSize() {
