@@ -54,7 +54,7 @@ public class BinaryHeapTest {
     @Test
     public void heapifyProcessesValuesSuccessfully() {
         this.heap.insert(5);
-        assertEquals(5,this.heap.returnMax());
+        assertEquals(5, this.heap.returnMax());
         this.heap.insert(10);
         assertEquals(10, this.heap.returnMax());
         this.heap.insert(8);
@@ -73,21 +73,35 @@ public class BinaryHeapTest {
     }
 
     @Test
-    public void increaseKeyWorksAsExpectedWhenGivenValueIsHigherThanOriginalValue() {
+    public void increaseKeyWorksAsExpectedWhenGivenValueIsHigherThanOriginalAndOnlyValue() {
         this.heap.insert(5);
-        this.heap.increaseKey(0, 10);
+        this.heap.increaseKey(5, 10);
         assertEquals(10, this.heap.returnMax());
     }
 
     @Test
     public void increaseKeyDoesNothingWhenGivenValueIsLowerThanOriginalValue() {
         this.heap.insert(5);
-        this.heap.increaseKey(0, 3);
+        this.heap.increaseKey(5, 3);
         assertEquals(5, this.heap.returnMax());
     }
 
     @Test
-    public void increaseKeyPlacesTheChangedKeyCorrectly() {
+    public void increaseKeyDoesNothingWhenGivenValueIsNotFound() {
+        this.heap.insert(15);
+        this.heap.increaseKey(9, 30);
+        assertEquals(15, this.heap.returnMax());
+    }
+
+    @Test
+    public void increaseKeyDoesNothingWhenGivenValueIsEqualToOriginalValue() {
+        this.heap.insert(10);
+        this.heap.increaseKey(10, 10);
+        assertEquals(10, this.heap.returnMax());
+    }
+
+    @Test
+    public void increaseKeySetsTheChangedKeyCorrectlyAsNewMaximumValue() {
         this.heap.insert(50);
         this.heap.insert(45);
         this.heap.insert(40);
@@ -96,35 +110,76 @@ public class BinaryHeapTest {
         this.heap.insert(65);
         this.heap.insert(10);
         assertEquals(65, this.heap.returnMax());
-        this.heap.increaseKey(6, 100);
+        this.heap.increaseKey(40, 100);
         assertEquals(100, this.heap.returnMax());
     }
 
     @Test
-    public void increaseKeyMovesNewValueToCorrectPosition() {
-        int[] heapAsArray = this.heap.getHeap();
-        heapAsArray[0] = 50;
-        heapAsArray[1] = 15;
-        heapAsArray[2] = 25;
-        heapAsArray[3] = 10;
-        this.heap.setHeap(heapAsArray);
-        this.heap.increaseKey(3, 20);
-        heapAsArray = this.heap.getHeap();
-        assertEquals(20, heapAsArray[1]);
+    public void increaseKeyWorksCorrectlyForValueOtherThanMaximumValue() {
+        this.heap.insert(10);
+        this.heap.insert(20);
+        this.heap.increaseKey(10, 15);
+        int[] currentHeap = this.heap.getHeap();
+        assertEquals(15, currentHeap[1]);
     }
 
     @Test
     public void decreaseKeyWorksAsExpectedWhenGivenValueIsLowerThanOriginalValue() {
         this.heap.insert(10);
-        this.heap.decreaseKey(0, 5);
+        this.heap.decreaseKey(10, 5);
         assertEquals(5, this.heap.returnMax());
     }
 
     @Test
     public void decreaseKeyDoesNothingWhenGivenValueIsHigherThanOriginalValue() {
         this.heap.insert(10);
-        this.heap.decreaseKey(0, 15);
+        this.heap.decreaseKey(10, 15);
         assertEquals(10, this.heap.returnMax());
+    }
+
+    @Test
+    public void decreaseKeyDoesNothingWhenGivenValueIsZero() {
+        this.heap.insert(15);
+        this.heap.decreaseKey(15, 0);
+        assertEquals(15, this.heap.returnMax());
+    }
+
+    @Test
+    public void decreaseKeyDoesNothingWhenGivenValueIsNegative() {
+        this.heap.insert(15);
+        this.heap.decreaseKey(15, -10);
+        assertEquals(15, this.heap.returnMax());
+    }
+
+    @Test
+    public void decreaseKeyDoesNothingWhenGivenValueIsNotFound() {
+        this.heap.insert(15);
+        this.heap.decreaseKey(999, 10);
+        assertEquals(15, this.heap.returnMax());
+    }
+
+    @Test
+    public void decreaseKeyDoesNothingWhenGivenValueIsEqualToOriginalValue() {
+        this.heap.insert(10);
+        this.heap.decreaseKey(10, 10);
+        assertEquals(10, this.heap.returnMax());
+    }
+
+    @Test
+    public void indexOfReturnsCorrectIndex() {
+        this.heap.insert(5);
+        this.heap.insert(10);
+        int indexOf = this.heap.indexOf(5);
+        assertEquals(1, indexOf);
+
+    }
+
+    @Test
+    public void indexOfReturnsMinusOneIfGivenValueIsNotFound() {
+        this.heap.insert(5);
+        this.heap.insert(10);
+        int indexOf = this.heap.indexOf(999);
+        assertEquals(-1, indexOf);
     }
 
     @Test
