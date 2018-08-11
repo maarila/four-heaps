@@ -151,18 +151,20 @@ public class BinaryHeap {
     /**
      * Increases the value of the key in the given node index.
      *
-     * @param index the index of the node for which the value of the key is to
-     *              be increased.
-     * @param newKey the new value of the key.
+     * @param oldValue the old value of the key.
+     * @param newValue the new value of the key.
      */
-    public void increaseKey(int index, int newKey) {
-        if (newKey > this.heap[index]) {
-            this.heap[index] = newKey;
-            while (index > 0 && this.heap[parent(index)] < this.heap[index]) {
-                int helperVariable = this.heap[index];
-                this.heap[index] = this.heap[parent(index)];
-                this.heap[parent(index)] = helperVariable;
-                index = parent(index);
+    public void increaseKey(int oldValue, int newValue) {
+        if (newValue > oldValue) {
+            int index = indexOf(oldValue);
+            if (index >= 0) {
+                this.heap[index] = newValue;
+                while (index > 0 && this.heap[parent(index)] < this.heap[index]) {
+                    int helperVariable = this.heap[index];
+                    this.heap[index] = this.heap[parent(index)];
+                    this.heap[parent(index)] = helperVariable;
+                    index = parent(index);
+                }
             }
         }
     }
@@ -170,14 +172,16 @@ public class BinaryHeap {
     /**
      * Decreases the value of the key in the given node index.
      *
-     * @param index the index of the node for which the value of the key is to
-     *              be decreased.
-     * @param newKey the new value of the key.
+     * @param oldValue the old value of the key.
+     * @param newValue the new value of the key.
      */
-    public void decreaseKey(int index, int newKey) {
-        if (newKey < this.heap[index]) {
-            this.heap[index] = newKey;
-            heapify(this.heap, index);
+    public void decreaseKey(int oldValue, int newValue) {
+        if (newValue < oldValue && newValue > 0) {
+            int index = indexOf(oldValue);
+            if (index >= 0) {
+                this.heap[index] = newValue;
+                heapify(this.heap, index);
+            }
         }
     }
 
@@ -243,5 +247,16 @@ public class BinaryHeap {
      */
     public int getHeapSize() {
         return heapSize;
+    }
+
+    public int indexOf(int keyValue) {
+        int index = -1;
+        for (int i = 0; i < this.heapSize; i++) {
+            if (this.heap[i] == keyValue) {
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 }
