@@ -124,7 +124,7 @@ public class BinomialHeap {
             Node iteratingNode = nodeToIncrease;
 
             while (iteratingNode.getParent() != null
-                    && iteratingNode.getParent().getKey() > iteratingNode.getKey()) {
+                    && iteratingNode.getParent().getKey() < iteratingNode.getKey()) {
                 int helperValue = iteratingNode.getKey();
                 iteratingNode.setKey(iteratingNode.getParent().getKey());
                 iteratingNode.getParent().setKey(helperValue);
