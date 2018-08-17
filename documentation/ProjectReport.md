@@ -18,19 +18,19 @@ __Binary heap:__
 * return max: 
 * delete max:
 
-Binomial heap:__ 
+__Binomial heap:__
 
 * insert:
 * return max: 
 * delete max:
 
-Pairing heap:__ 
+__Pairing heap:__
 
 * insert:
 * return max: 
 * delete max:
 
-Fibonacci heap:__ 
+__Fibonacci heap:__
 
 * insert:
 * return max: 
