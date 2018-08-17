@@ -1,6 +1,6 @@
 ## General structure of the program
 
-The program consists of four implementations of the heap data structure: binary heap, binomial heap, pairing heap and fibonacci heap. In addition, the program has a rudimentary console-based command line interface for running performance tests on the heap operations of the aforementioned heaps.
+The program consists of four implementations of the heap data structure: binary heap, binomial heap, pairing heap and fibonacci heap. In addition, the program has a rudimentary console-based command line interface for running performance tests on the heap operations of the aforementioned heaps (for further information, see [Testing Report](https://github.com/maarila/four-heaps/blob/master/documentation/TestingReport.md)).
 
 All the heap implementations are maximum heaps and they have the standard heap operations:
 

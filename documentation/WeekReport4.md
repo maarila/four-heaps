@@ -8,8 +8,6 @@ What I did finish this week was the work that was left on binomial heap from las
 
 Also, did something new this week. The melding and linking operations of the pairing heap (similar to the merge from binomial heap) were once again a little confusing at times, but since I knew (or at least assumed that I knew) how it was supposed to work, I began writing tests for them before they were finished. Workflow became 'write some aspect of the method, write tests for said aspect -> when successful rinse and repeat'. It worked better than I initially thought and reduced frustration quite a bit. I wish I had come up with this while implementing binomial heap, but at least I now have something to look forward to regarding fibonacci heap... After the tests were complete, I felt pretty comfortable refactoring the meld method into something more readable knowing that the tests would make sure I do not break it.
 
-Question regarding the testing documentation: looking at the example projects, one of them has testing documentation focusing on the more traditional testing (unit testing etc.), while the other focuses on performance testing. Am I correct in in assuming that the former is the desired one rather than the latter?
-
 Updated plan, as usual, is below. The fourth week went more or less according to plan schedule-wise, and provided that I find the problem in the immediate near future, I might even be ahead of schedule a little bit.
 
 Week 1: done

@@ -1,6 +1,6 @@
 ## What was tested and how?
 
-The tests were written with JUnit, and the test coverage can be found on [codecov](https://codecov.io/gh/maarila/four-heaps). 
+All the heaps have the standard heap operations: insert, return maximum value and delete maximum value. The operations were tested using integer values and by running the tests with various input sizes multiple times. The end result was then the average of the test running times.
 
 ## How to reproduce test results?
 
