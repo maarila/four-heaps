@@ -1,25 +1,62 @@
 package components;
 
+/**
+ * This class provides the basic implementation of a maximum pairing heap. It
+ * contains the typical methods expected from a maximum heap - insertion,
+ * returning the maximum value, deleting maximum and increasing key.
+ * 
+ * @author Mika Äärilä
+ */
 public class PairingHeap {
 
+    /**
+     * The basic element of a pairing heap - the root node that provides links
+     * to its parent, child and sibling. In addition, root maintains its key 
+     * value.
+     */
     private PairingNode root;
 
+    /**
+     * Constructor for the pairing heap. At the start, the root is set to null.
+     */
     public PairingHeap() {
         this.root = null;
     }
 
+    /**
+     * Creates and returns a new pairing heap. 
+     * 
+     * @return a new pairing heap.
+     */
     public PairingHeap makePairingHeap() {
         return new PairingHeap();
     }
 
+    /**
+     * Returns the root node of the heap.
+     * 
+     * @return the root node.
+     */
     public PairingNode getRoot() {
         return this.root;
     }
 
+    /**
+     * Returns the maximum value of the heap.
+     * 
+     * @return the maximum value of the heap.
+     */
     public int returnMax() {
         return this.root == null ? Integer.MIN_VALUE : this.root.getKey();
     }
 
+    /**
+     * Deletes the maximum value of the heap and returns it. After deletion, all
+     * the remaining nodes need to built into a new heap via the linkSiblings
+     * operation.
+     * 
+     * @return the maximum value of the heap.
+     */
     public int deleteMax() {
         if (this.root == null) {
             return Integer.MIN_VALUE;
@@ -37,12 +74,27 @@ public class PairingHeap {
         return maxValue;
     }
 
+    /**
+     * Inserts a new value into the heap. Insertion requires the new node to be
+     * melded into the heap i.e. if the new node is not the new root node, it 
+     * will become one of the sub-roots of the root node.
+     * 
+     * @param newValue the value to be inserted into the heap.
+     */
     public void insert(int newValue) {
         PairingNode newNode = new PairingNode(newValue);
         PairingNode meldedNode = this.meld(this.root, newNode);
         this.root = meldedNode;
     }
 
+    /**
+     * Melds two roots into one. The root that has the larger key will become 
+     * the new root. The other will become a subroot to said root.
+     * 
+     * @param firstRoot first root to be melded.
+     * @param secondRoot second root to melded.
+     * @return the melded root.
+     */
     public PairingNode meld(PairingNode firstRoot, PairingNode secondRoot) {
         if (firstRoot == null) {
             return secondRoot;
@@ -69,6 +121,15 @@ public class PairingHeap {
         return meldedRoot;
     }
 
+    /**
+     * Links separate roots together to form a new pairing heap. The two-pass
+     * procedure starts by melding two consecutive separate roots into pairs
+     * after which during the second pass the pairs are melded into the last
+     * pair (or individual root) formed on the first pass.
+     * 
+     * @param startingNode the node from which the linking starts.
+     * @return the new node satisfies the heap condition.
+     */
     public PairingNode linkSiblings(PairingNode startingNode) {
         if (startingNode.getRightPointerToSibling() == null) {
             return startingNode;
@@ -110,7 +171,13 @@ public class PairingHeap {
 
         return allSiblings[0];
     }
-
+    
+    /**
+     * Doubles the size of the given array.
+     * 
+     * @param siblingArray the array of which size needs to be doubled.
+     * @return the double-sized array.
+     */
     public PairingNode[] doubleArraySize(PairingNode[] siblingArray) {
         PairingNode[] doubledArray = new PairingNode[siblingArray.length * 2];
 
