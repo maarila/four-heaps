@@ -2,23 +2,24 @@ package components;
 
 /**
  * This class provides the node needed for the proper functioning of the pairing
- * heap. This node implementation is identical to that of the binomial heap with
- * the exception of having no degree property and somewhat different naming
- * convention.
+ * heap. This node implementation is similar to that of the binomial heap, but 
+ * pairing node has no parent node nor a degree property and it also has links
+ * to both its siblings.
  *
  * @author Mika Äärilä
  */
 public class PairingNode {
 
     /**
-     * The properties of pairing node include links to its parent node, child
-     * node and sibling node. In addition, it holds the information regarding
-     * the node's key value.
+     * The properties of pairing node include links to its leftmost child node, 
+     * and both left and right sibling nodes. The leftmost child node uses its 
+     * left pointer to sibling to link to its parent. In addition, pairing node 
+     * holds the information regarding the node's key value.
      */
     private int key;
-    private PairingNode parent;
-    private PairingNode leftPointerToChild;
-    private PairingNode rightPointerToSibling;
+    private PairingNode leftmostChild;
+    private PairingNode leftSibling;
+    private PairingNode rightSibling;
 
     /**
      * Constructor for the node.
@@ -27,9 +28,9 @@ public class PairingNode {
      */
     public PairingNode(int key) {
         this.key = key;
-        this.parent = null;
-        this.leftPointerToChild = null;
-        this.rightPointerToSibling = null;
+        this.leftmostChild = null;
+        this.leftSibling = null;
+        this.rightSibling = null;
     }
 
     /**
@@ -51,39 +52,39 @@ public class PairingNode {
     }
 
     /**
-     * Returns the parent node of the current node.
+     * Returns the leftmost child node of the current node.
      *
-     * @return the parent node.
+     * @return the leftmost child node.
      */
-    public PairingNode getParent() {
-        return parent;
+    public PairingNode getLeftmostChild() {
+        return leftmostChild;
     }
 
     /**
-     * Sets the parent node of the current node.
+     * Sets the leftmost child node of the current node.
      *
-     * @param parent the new parent node.
+     * @param leftmostChild the new leftmost child node.
      */
-    public void setParent(PairingNode parent) {
-        this.parent = parent;
+    public void setLeftmostChild(PairingNode leftmostChild) {
+        this.leftmostChild = leftmostChild;
     }
 
     /**
-     * Returns the child node for the current node.
+     * Returns the left sibling node for the current node.
      *
-     * @return the child node.
+     * @return the left sibling node.
      */
-    public PairingNode getLeftPointerToChild() {
-        return leftPointerToChild;
+    public PairingNode getLeftSibling() {
+        return leftSibling;
     }
 
     /**
-     * Sets the child node for the current node.
+     * Sets the left sibling node for the current node.
      *
-     * @param leftPointerToChild the new child node.
+     * @param leftSibling the new sibling node.
      */
-    public void setLeftPointerToChild(PairingNode leftPointerToChild) {
-        this.leftPointerToChild = leftPointerToChild;
+    public void setLeftSibling(PairingNode leftSibling) {
+        this.leftSibling = leftSibling;
     }
 
     /**
@@ -91,16 +92,16 @@ public class PairingNode {
      *
      * @return the sibling node.
      */
-    public PairingNode getRightPointerToSibling() {
-        return this.rightPointerToSibling;
+    public PairingNode getRightSibling() {
+        return this.rightSibling;
     }
 
     /**
      * Sets the sibling node of the current node.
      *
-     * @param rightPointerToSibling the new sibling node.
+     * @param rightSibling the new sibling node.
      */
-    public void setRightPointerToSibling(PairingNode rightPointerToSibling) {
-        this.rightPointerToSibling = rightPointerToSibling;
+    public void setRightSibling(PairingNode rightSibling) {
+        this.rightSibling = rightSibling;
     }
 }
