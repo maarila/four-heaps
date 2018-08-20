@@ -4,14 +4,14 @@ package components;
  * This class provides the basic implementation of a maximum pairing heap. It
  * contains the typical methods expected from a maximum heap - insertion,
  * returning the maximum value, deleting maximum and increasing key.
- * 
+ *
  * @author Mika Äärilä
  */
 public class PairingHeap {
 
     /**
      * The basic element of a pairing heap - the root node that provides links
-     * to its parent, child and sibling. In addition, root maintains its key 
+     * to its parent, child and sibling. In addition, root maintains its key
      * value.
      */
     private PairingNode root;
@@ -24,8 +24,8 @@ public class PairingHeap {
     }
 
     /**
-     * Creates and returns a new pairing heap. 
-     * 
+     * Creates and returns a new pairing heap.
+     *
      * @return a new pairing heap.
      */
     public PairingHeap makePairingHeap() {
@@ -34,7 +34,7 @@ public class PairingHeap {
 
     /**
      * Returns the root node of the heap.
-     * 
+     *
      * @return the root node.
      */
     public PairingNode getRoot() {
@@ -43,7 +43,7 @@ public class PairingHeap {
 
     /**
      * Returns the maximum value of the heap.
-     * 
+     *
      * @return the maximum value of the heap.
      */
     public int returnMax() {
@@ -54,7 +54,7 @@ public class PairingHeap {
      * Deletes the maximum value of the heap and returns it. After deletion, all
      * the remaining nodes need to built into a new heap via the linkSiblings
      * operation.
-     * 
+     *
      * @return the maximum value of the heap.
      */
     public int deleteMax() {
@@ -64,11 +64,10 @@ public class PairingHeap {
 
         int maxValue = this.root.getKey();
 
-        if (this.root.getLeftPointerToChild() == null) {
+        if (this.root.getLeftmostChild() == null) {
             this.root = null;
         } else {
-            this.root.getLeftPointerToChild().setParent(null);
-            this.root = linkSiblings(this.root.getLeftPointerToChild());
+            this.root = linkSiblings(this.root.getLeftmostChild());
         }
 
         return maxValue;
@@ -76,9 +75,9 @@ public class PairingHeap {
 
     /**
      * Inserts a new value into the heap. Insertion requires the new node to be
-     * melded into the heap i.e. if the new node is not the new root node, it 
-     * will become one of the sub-roots of the root node.
-     * 
+     * melded into the heap i.e. if the new node is not the new root node, it
+     * will become one of the subroots of the root node.
+     *
      * @param newValue the value to be inserted into the heap.
      */
     public void insert(int newValue) {
@@ -88,9 +87,9 @@ public class PairingHeap {
     }
 
     /**
-     * Melds two roots into one. The root that has the larger key will become 
+     * Melds two roots into one. The root that has the larger key will become
      * the new root. The other will become a subroot to said root.
-     * 
+     *
      * @param firstRoot first root to be melded.
      * @param secondRoot second root to melded.
      * @return the melded root.
@@ -107,14 +106,37 @@ public class PairingHeap {
         PairingNode meldedRoot;
 
         if (firstRoot.getKey() >= secondRoot.getKey()) {
-            secondRoot.setParent(firstRoot);
-            secondRoot.setRightPointerToSibling(firstRoot.getLeftPointerToChild());
-            firstRoot.setLeftPointerToChild(secondRoot);
+            firstRoot.setRightSibling(secondRoot.getRightSibling());
+
+            if (firstRoot.getRightSibling() != null) {
+                firstRoot.getRightSibling().setLeftSibling(firstRoot);
+
+            }
+
+            secondRoot.setLeftSibling(firstRoot);
+            secondRoot.setRightSibling(firstRoot.getLeftmostChild());
+
+            if (secondRoot.getRightSibling() != null) {
+                secondRoot.getRightSibling().setLeftSibling(secondRoot);
+            }
+
+            firstRoot.setLeftmostChild(secondRoot);
             meldedRoot = firstRoot;
         } else {
-            firstRoot.setParent(secondRoot);
-            firstRoot.setRightPointerToSibling(secondRoot.getLeftPointerToChild());
-            secondRoot.setLeftPointerToChild(firstRoot);
+            secondRoot.setRightSibling(firstRoot.getRightSibling());
+
+            if (secondRoot.getRightSibling() != null) {
+                secondRoot.getRightSibling().setLeftSibling(secondRoot);
+            }
+
+            firstRoot.setLeftSibling(secondRoot);
+            firstRoot.setRightSibling(secondRoot.getLeftmostChild());
+
+            if (firstRoot.getRightSibling() != null) {
+                firstRoot.getRightSibling().setLeftSibling(firstRoot);
+            }
+
+            secondRoot.setLeftmostChild(firstRoot);
             meldedRoot = secondRoot;
         }
 
@@ -126,12 +148,12 @@ public class PairingHeap {
      * procedure starts by melding two consecutive separate roots into pairs
      * after which during the second pass the pairs are melded into the last
      * pair (or individual root) formed on the first pass.
-     * 
+     *
      * @param startingNode the node from which the linking starts.
      * @return the new node satisfies the heap condition.
      */
     public PairingNode linkSiblings(PairingNode startingNode) {
-        if (startingNode.getRightPointerToSibling() == null) {
+        if (startingNode.getRightSibling() == null) {
             return startingNode;
         }
 
@@ -150,8 +172,8 @@ public class PairingHeap {
                 allSiblings = doubleArraySize(allSiblings);
             }
 
-            iteratingNode = currentNode.getRightPointerToSibling();
-            currentNode.setRightPointerToSibling(null);
+            iteratingNode = currentNode.getRightSibling();
+            currentNode.setRightSibling(null);
         }
 
         int indexOfLastSibling = 0;
@@ -171,10 +193,37 @@ public class PairingHeap {
 
         return allSiblings[0];
     }
-    
+
+    /**
+     * Increase the key value of the given node.
+     *
+     * @param nodeToIncrease the node of which key is to be increased.
+     * @param newKey the new value of the key.
+     */
+    public void increaseKey(PairingNode nodeToIncrease, int newKey) {
+        if (newKey > nodeToIncrease.getKey()) {
+            if (nodeToIncrease.getKey() == this.returnMax()) {
+                nodeToIncrease.setKey(newKey);
+                return;
+            }
+
+            nodeToIncrease.setKey(newKey);
+            nodeToIncrease.getLeftSibling().setRightSibling(nodeToIncrease.getRightSibling());
+
+            if (nodeToIncrease.getRightSibling() != null) {
+                nodeToIncrease.getRightSibling().setLeftSibling(nodeToIncrease.getLeftSibling());
+            }
+
+            nodeToIncrease.setLeftSibling(null);
+            nodeToIncrease.setRightSibling(null);
+
+            this.root = meld(this.root, nodeToIncrease);
+        }
+    }
+
     /**
      * Doubles the size of the given array.
-     * 
+     *
      * @param siblingArray the array of which size needs to be doubled.
      * @return the double-sized array.
      */
