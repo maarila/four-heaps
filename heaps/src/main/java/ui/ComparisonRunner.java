@@ -20,6 +20,8 @@ public class ComparisonRunner {
         commands.put("1", "Run timed tests for insert operation");
         commands.put("2", "Run timed tests for binary heap's insert operation");
         commands.put("3", "Run timed tests for binomial heap's insert operation");
+        commands.put("4", "Run timed tests for pairing heap's insert operation");
+        commands.put("5", "Run timed tests for fibonacci heap's insert operation");
         commands.put("q", "Quit");
     }
 
@@ -27,10 +29,10 @@ public class ComparisonRunner {
         System.out.println();
         System.out.println("Welcome to comparing four heaps!");
         System.out.println();
-        showOptions();
 
         commandLoop:
         while (true) {
+            showOptions();
             System.out.println();
             System.out.println("Enter command: ");
             String command = inputReader.nextLine();
@@ -39,7 +41,6 @@ public class ComparisonRunner {
                 System.out.println();
                 System.out.println("Unknown command!");
                 System.out.println();
-                showOptions();
             }
 
             switch (command) {
@@ -52,6 +53,12 @@ public class ComparisonRunner {
                 case "3":
                     runBinomialHeapInsertTests();
                     break;
+                case "4":
+                    runPairingHeapInsertTests();
+                    break;
+                case "5":
+                    runFibonacciHeapInsertTests();
+                    break;
                 case "q":
                     break commandLoop;
             }
@@ -62,13 +69,15 @@ public class ComparisonRunner {
         commands.entrySet().forEach(entry -> System.out.println(entry.getKey() + "\t" + entry.getValue()));
 
     }
-    
+
     public void runInsertTests() {
         System.out.println();
         System.out.println("Running insert tests...");
         System.out.println();
         comparisonService.runBinaryHeapInsert();
         comparisonService.runBinomialHeapInsert();
+        comparisonService.runPairingHeapInsert();
+        comparisonService.runFibonacciHeapInsert();
         System.out.println();
         System.out.println("Tests completed!");
     }
@@ -91,4 +100,21 @@ public class ComparisonRunner {
         System.out.println("Tests completed!");
     }
 
+    public void runPairingHeapInsertTests() {
+        System.out.println();
+        System.out.println("Running pairing heap insert tests...");
+        System.out.println();
+        comparisonService.runPairingHeapInsert();
+        System.out.println();
+        System.out.println("Tests completed!");
+    }
+
+    public void runFibonacciHeapInsertTests() {
+        System.out.println();
+        System.out.println("Running fibonacci heap insert tests...");
+        System.out.println();
+        comparisonService.runFibonacciHeapInsert();
+        System.out.println();
+        System.out.println("Tests completed!");
+    }
 }
