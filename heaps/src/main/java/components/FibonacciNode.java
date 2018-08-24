@@ -1,7 +1,20 @@
 package components;
 
+/**
+ * This class provides the node needed for the proper functioning of the
+ * fibonacci heap.
+ *
+ * @author Mika Äärilä
+ */
 public class FibonacciNode {
 
+    /**
+     * The node includes a circular doubly-linked list to both its siblings as
+     * well links to its parent and child. In addition, the node tracks the
+     * number of its children in the degree property, its weight i.e. its key
+     * value in the key property and finally it uses the boolean value mark to
+     * track its history when dealing with the increase/decrease key operation.
+     */
     int key;
     int degree;
     Boolean mark;
@@ -10,6 +23,11 @@ public class FibonacciNode {
     FibonacciNode leftSibling;
     FibonacciNode rightSibling;
 
+    /**
+     * Constructor for the node.
+     *
+     * @param key the value of the node's key property.
+     */
     public FibonacciNode(int key) {
         this.key = key;
         this.degree = 0;
