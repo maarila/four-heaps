@@ -53,15 +53,15 @@ public class FibonacciHeapTest {
     }
 
     @Test
-    public void heapWithOneValueHasNoLeftSibling() {
+    public void heapWithOneValueHasItselfForLeftSibling() {
         this.heap.insert(50);
-        assertEquals(null, this.heap.getMaxNode().getLeftSibling());
+        assertEquals(this.heap.getMaxNode(), this.heap.getMaxNode().getLeftSibling());
     }
 
     @Test
-    public void heapWithOneValueHasNoRightSibling() {
+    public void heapWithOneValueHasItselfForRightSibling() {
         this.heap.insert(50);
-        assertEquals(null, this.heap.getMaxNode().getRightSibling());
+        assertEquals(this.heap.getMaxNode(), this.heap.getMaxNode().getRightSibling());
     }
 
     @Test
@@ -136,6 +136,19 @@ public class FibonacciHeapTest {
         assertTrue(maxNode == null);
     }
     
-    
+    @Test
+    public void deletingMaxAfterInsertingMultipleValuesReplacesMaxValueCorrectly() {
+        this.heap.insert(30);
+        this.heap.insert(50);
+        this.heap.insert(20);
+        this.heap.insert(25);
+        this.heap.insert(40);
+        this.heap.insert(35);
+        assertEquals(50, this.heap.returnMax());
+        this.heap.deleteMax();
+        assertEquals(40, this.heap.returnMax());
+        this.heap.deleteMax();
+        assertEquals(35, this.heap.returnMax());
+    }
 
 }
