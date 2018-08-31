@@ -12,7 +12,7 @@ The heaps also have a selection of helper methods as required by the above opera
 
 ## Time and space complexities
 
-__Binary heap:__ 
+__Binary heap:__
 
 _insert_: most operations require a constant time, except for bringing a new item to its correct position ('bubbling-up'). As the binary heap is in the form of a binary tree, its height is logarithmic in regards to the number of its nodes, and therefore the operation (below) has a worst-case time complexity of O(log n).
 
@@ -49,11 +49,11 @@ __Fibonacci heap:__
 
 ## Performance comparisons
 
-
+For a detailed look into how the operations compare to each other, please consult the [testing report](https://github.com/maarila/four-heaps/blob/master/documentation/TestingReport.md).
 
 ## Things that could be improved
 
-
+(TODO: Once everything else is finished, write this.)
 
 ## Sources
 

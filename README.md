@@ -9,6 +9,7 @@ __Documentation:__
 * [Project Definition](https://github.com/maarila/four-heaps/blob/master/documentation/ProjectDefinition.md)
 * [Project Report](https://github.com/maarila/four-heaps/blob/master/documentation/ProjectReport.md) (work-in-progress)
 * [Testing Report](https://github.com/maarila/four-heaps/blob/master/documentation/TestingReport.md) (work-in-progress)
+* [User Guide](https://github.com/maarila/four-heaps/blob/master/documentation/UserGuide.md) (work-in-progress)
 
 __Weekly reports:__
 
@@ -17,4 +18,5 @@ __Weekly reports:__
 * [Week 3](https://github.com/maarila/four-heaps/blob/master/documentation/WeekReport3.md)
 * [Week 4](https://github.com/maarila/four-heaps/blob/master/documentation/WeekReport4.md)
 * [Week 5](https://github.com/maarila/four-heaps/blob/master/documentation/WeekReport5.md)
+* [Week 6](https://github.com/maarila/four-heaps/blob/master/documentation/WeekReport6.md)
 
