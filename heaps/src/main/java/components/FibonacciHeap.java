@@ -12,8 +12,8 @@ public class FibonacciHeap {
     /**
      * The basic element of the fibonacci heap - the max node, which provides
      * links to its siblings, parent and child, as well contains the weight of
-     * the node among other information. The property 'numberOfNodes' tracks
-     * the number of nodes belonging to the heap.
+     * the node among other information. The property 'numberOfNodes' tracks the
+     * number of nodes belonging to the heap.
      */
     FibonacciNode max;
     int numberOfNodes;
@@ -48,14 +48,12 @@ public class FibonacciHeap {
         FibonacciNode newNode = new FibonacciNode(newValue);
         if (this.max == null) {
             this.max = newNode;
+            this.max.setLeftSibling(this.max);
+            this.max.setRightSibling(this.max);
         } else {
             newNode.setRightSibling(this.max);
             newNode.setLeftSibling(this.max.getLeftSibling());
-
-            if (newNode.getLeftSibling() != null) {
-                newNode.getLeftSibling().setRightSibling(newNode);
-            }
-
+            newNode.getLeftSibling().setRightSibling(newNode);
             this.max.setLeftSibling(newNode);
 
             if (newNode.getKey() > this.max.getKey()) {
@@ -89,34 +87,32 @@ public class FibonacciHeap {
         }
 
         FibonacciNode maximumNode = this.max;
+        int numberOfChildren = this.max.getDegree();
 
         FibonacciNode childOfMaxNode = this.max.getChild();
-        FibonacciNode iteratingChild = this.max.getChild();
         FibonacciNode rightSibling;
 
-        if (iteratingChild != null) {
-            do {
-                rightSibling = iteratingChild.getRightSibling();
-                // remove the child from the list of children
-                iteratingChild.getLeftSibling().setRightSibling(iteratingChild.getRightSibling());
-                iteratingChild.getRightSibling().setLeftSibling(iteratingChild.getLeftSibling());
-                // add the child to root list
-                iteratingChild.setRightSibling(this.max);
-                iteratingChild.setLeftSibling(this.max.getLeftSibling());
-                this.max.setLeftSibling(iteratingChild);
+        while (numberOfChildren > 0) {
+            rightSibling = childOfMaxNode.getRightSibling();
 
-                iteratingChild.setParent(null);
-                iteratingChild = rightSibling;
-            } while (iteratingChild != childOfMaxNode);
+            // remove the child from the list of children
+            childOfMaxNode.getLeftSibling().setRightSibling(childOfMaxNode.getRightSibling());
+            childOfMaxNode.getRightSibling().setLeftSibling(childOfMaxNode.getLeftSibling());
+
+            // add the child to root list
+            childOfMaxNode.setRightSibling(this.max);
+            childOfMaxNode.setLeftSibling(this.max.getLeftSibling());
+            childOfMaxNode.getLeftSibling().setRightSibling(childOfMaxNode);
+
+            this.max.setLeftSibling(childOfMaxNode);
+
+            childOfMaxNode.setParent(null);
+            childOfMaxNode = rightSibling;
+            numberOfChildren--;
         }
 
-        if (maximumNode.getLeftSibling() != null) {
-            maximumNode.getLeftSibling().setRightSibling(maximumNode.getRightSibling());
-        }
-
-        if (maximumNode.getRightSibling() != null) {
-            maximumNode.getRightSibling().setLeftSibling(maximumNode.getLeftSibling());
-        }
+        maximumNode.getLeftSibling().setRightSibling(maximumNode.getRightSibling());
+        maximumNode.getRightSibling().setLeftSibling(maximumNode.getLeftSibling());
 
         if (maximumNode == maximumNode.getRightSibling()) {
             this.max = null;
@@ -131,7 +127,101 @@ public class FibonacciHeap {
     }
 
     public void consolidate() {
+        if (this.max == null) {
+            return;
+        }
 
+        // calculate the upper bound on the degree of any node
+        double goldenRatio = (1 + Math.sqrt(5)) / 2;
+        int maxDegree = (int) Math.floor(Math.log(numberOfNodes) / Math.log(goldenRatio)) + 1;
+        FibonacciNode[] nodesOfDegree = new FibonacciNode[maxDegree + 1];
+
+        // count the number of nodes in the root list
+        int nodesInRootList = 1;
+        FibonacciNode iteratingNode = this.max.getRightSibling();
+
+        while (iteratingNode != this.max) {
+            iteratingNode = iteratingNode.getRightSibling();
+            nodesInRootList++;
+        }
+
+        // place the nodes in the root list into a separate array
+        FibonacciNode[] rootNodes = new FibonacciNode[nodesInRootList];
+
+        for (int i = 0; i < nodesInRootList; i++) {
+            rootNodes[i] = iteratingNode;
+            iteratingNode = iteratingNode.getRightSibling();
+        }
+
+        // link nodes with same degree
+        for (int i = 0; i < nodesInRootList; i++) {
+            iteratingNode = rootNodes[i];
+            int degree = iteratingNode.getDegree();
+
+            while (nodesOfDegree[degree] != null) {
+                FibonacciNode nodeWithSameDegree = nodesOfDegree[degree];
+
+                if (iteratingNode.getKey() < nodeWithSameDegree.getKey()) {
+                    FibonacciNode helperNode = iteratingNode;
+                    iteratingNode = nodeWithSameDegree;
+                    nodeWithSameDegree = helperNode;
+                }
+
+                link(nodeWithSameDegree, iteratingNode);
+                nodesOfDegree[degree] = null;
+                degree++;
+            }
+
+            nodesOfDegree[degree] = iteratingNode;
+        }
+
+        // empty the root list
+        this.max = null;
+
+        // reconstruct the root list
+        for (int i = 0; i <= maxDegree; i++) {
+            if (nodesOfDegree[i] != null) {
+                if (this.max == null) {
+                    this.max = nodesOfDegree[i];
+                    this.max.setLeftSibling(this.max);
+                    this.max.setRightSibling(this.max);
+                } else {
+                    nodesOfDegree[i].setRightSibling(this.max);
+                    nodesOfDegree[i].setLeftSibling(this.max.getLeftSibling());
+
+                    this.max.getLeftSibling().setRightSibling(nodesOfDegree[i]);
+                    this.max.setLeftSibling(nodesOfDegree[i]);
+
+                    if (nodesOfDegree[i].getKey() > this.max.getKey()) {
+                        this.max = nodesOfDegree[i];
+                    }
+                }
+            }
+        }
+    }
+
+    public void link(FibonacciNode firstNode, FibonacciNode secondNode) {
+        FibonacciNode firstNodesLeft = firstNode.getLeftSibling();
+        FibonacciNode firstNodesRight = firstNode.getRightSibling();
+
+        firstNodesLeft.setRightSibling(firstNodesRight);
+        firstNodesRight.setLeftSibling(firstNodesLeft);
+        firstNode.setParent(secondNode);
+
+        if (secondNode.getChild() == null) {
+            secondNode.setChild(firstNode);
+            firstNode.setLeftSibling(firstNode);
+            firstNode.setRightSibling(firstNode);
+        } else {
+            firstNode.setLeftSibling(secondNode.getChild());
+            firstNode.setRightSibling(secondNode.getChild().getRightSibling());
+            secondNode.getChild().setRightSibling(firstNode);
+            firstNode.getRightSibling().setLeftSibling(firstNode);
+
+        }
+
+        secondNode.setDegree(secondNode.getDegree() + 1);
+        firstNode.setMark(false);
     }
 
     public void increaseKey() {
