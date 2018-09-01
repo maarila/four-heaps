@@ -76,8 +76,8 @@ public class FibonacciHeap {
 
     /**
      * Deletes the node with the current maximum value and returns said value.
-     *
-     * Please note: implementation is not yet finished.
+     * After deletion, the heap is re-built if the maximum node was not the only
+     * node.
      *
      * @return the current maximum value as type integer.
      */
@@ -126,6 +126,16 @@ public class FibonacciHeap {
         return maximumNode.getKey();
     }
 
+    /**
+     * A helper function for deleteMax(). Deleting a value from a heap with more
+     * than one value results in the heap being 'consolidated'. This means that
+     * the children of the max value being removed, i.e. the child of the max
+     * value and all its siblings, are first joined separately into the root
+     * list. Then the root list is iterated through and all nodes with the same
+     * degree are linked until all nodes have unique degrees. Finally, the new
+     * root list is built from the unique nodes, and the node with the highest
+     * key value becomes the new max node.
+     */
     public void consolidate() {
         if (this.max == null) {
             return;
@@ -200,6 +210,13 @@ public class FibonacciHeap {
         }
     }
 
+    /**
+     * Links the two given nodes. First, the first given node is removed from
+     * the root list and then made into a child of the second node.
+     *
+     * @param firstNode the first node to be linked
+     * @param secondNode the second node to be linked
+     */
     public void link(FibonacciNode firstNode, FibonacciNode secondNode) {
         FibonacciNode firstNodesLeft = firstNode.getLeftSibling();
         FibonacciNode firstNodesRight = firstNode.getRightSibling();
