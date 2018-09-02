@@ -24,19 +24,19 @@ The operations were tested using integer values and by running the tests with ea
 
 _insert operation:_
 
-![Insert comparison](https://github.com/maarila/four-heaps/blob/master/img/insert.png)
+![Insert comparison](https://github.com/maarila/four-heaps/blob/master/img/insert-linear.png)
 
 The results for the insert operations show that the binary heap is uniformly the fastest data structure. All the other heaps (including the Java priority queue) are more or less equally fast or slow, with real differences only starting to show with the largest input size.
 
 _returnMax operation:_
 
-![Return max comparison](https://github.com/maarila/four-heaps/blob/master/img/return-max.png)
+![Return max comparison](https://github.com/maarila/four-heaps/blob/master/img/return-max-linear.png)
 
 The result of the tests for the return max operation is quite divided. All other data structures returned the data in under a millisecond (shown in the graph as a single blue line), which is consistent with the expectation of them having O(1) time complexity. The only exception was the binomial heap with its expected time complexity of O(log n). Starting from a sample size of a hundred thousand, it started trailing the other heaps more and more.
 
 _deleteMax operation:_
 
-![Delete max comparison](https://github.com/maarila/four-heaps/blob/master/img/delete-max.png)
+![Delete max comparison](https://github.com/maarila/four-heaps/blob/master/img/delete-max-linear.png)
 
 Delete max operation turned out to be the most interesting one of all operations. The other heaps, including the priority queue, showed rather uniform results but for the pairing heap, things were more varied. When the pairing heap was given its input in sequential order (1 -> n) the delete max operation was clearly the fastest one of all. If, however, the input was given in reverse sequential order (n -> 1), the delete max operation for the pairing heap was the slowest one. On average, the pairing heap falls in line with the other data structures, which is consistent with its amortized time complexity of O(log n).
 
