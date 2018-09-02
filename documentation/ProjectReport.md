@@ -4,21 +4,21 @@ The program consists of four implementations of the heap data structure: binary 
 
 All the heap implementations are maximum heaps and they have the standard heap operations:
 
-* heap-insert(H, k): add key _k_ into heap _H_
 * heap-max(H): return the maximum key value in heap _H_
-* heap-del-max(H): delete and return the maximum key value in heap _H_.
+* heap-del-max(H): delete and return the maximum key value in heap _H_
+* heap-insert(H, k): add key _k_ into heap _H_.
 
 The heaps also have a selection of helper methods as required by the above operations.
 
 ## Time complexities
 
-The time complexities of the four heaps are summarized in Wikipedia (2018, [1]) as follows:
+The time complexities of the four heaps are summarized in Wikipedia (2018, [1]) as follows (time complexities marked with an asterisk are amortized):
 
-| Operation  | Binary   | Binomial | Pairing  | Fibonacci |
-|----------- |--------- |--------- |--------- |---------- |
-| return-max | O(1)     | O(log n) | O(1)     | O(1)      |
-| delete-max | O(log n) | O(log n) | O(log n) | O(log n)  |
-| insert     | O(log n) | O(1)     | O(1)     | O(1)      |
+| Operation  | Binary   | Binomial | Pairing   | Fibonacci |
+|----------- |--------- |--------- |---------- |---------- |
+| return-max | O(1)     | O(log n) | O(1)      | O(1)      |
+| delete-max | O(log n) | O(log n) | O(log n)* | O(log n)* |
+| insert     | O(log n) | O(1)*    | O(1)      | O(1)      |
 
 __return-max:__
 

@@ -22,17 +22,23 @@ __Performance testing__
 
 The operations were tested using integer values and by running the tests with each input size ten times. The end result is the average of the test results. The input sizes were divided into five categories - from a hundred thousand to eight million. Even larger input sizes were also considered and tested, but they were found infeasible to run due to the tests crashing the computer.
 
+---
+
 _insert operation:_
 
 ![Insert comparison](https://github.com/maarila/four-heaps/blob/master/img/insert-linear.png)
 
 The results for the insert operations show that the binary heap is uniformly the fastest data structure. All the other heaps (including the Java priority queue) are more or less equally fast or slow, with real differences only starting to show with the largest input size.
 
+---
+
 _returnMax operation:_
 
 ![Return max comparison](https://github.com/maarila/four-heaps/blob/master/img/return-max-linear.png)
 
 The result of the tests for the return max operation is quite divided. All other data structures returned the data in under a millisecond (shown in the graph as a single blue line), which is consistent with the expectation of them having O(1) time complexity. The only exception was the binomial heap with its expected time complexity of O(log n). Starting from a sample size of a hundred thousand, it started trailing the other heaps more and more.
+
+---
 
 _deleteMax operation:_
 
