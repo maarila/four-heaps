@@ -241,32 +241,122 @@ public class FibonacciHeap {
         firstNode.setMark(false);
     }
 
-    public void increaseKey() {
+    /**
+     * Increase the key value of the given node.
+     *
+     * @param nodeToIncrease the node of which value is to be increased
+     * @param newKey the new key value of the node
+     */
+    public void increaseKey(FibonacciNode nodeToIncrease, int newKey) {
+        if (newKey > nodeToIncrease.getKey()) {
+            nodeToIncrease.setKey(newKey);
+            FibonacciNode parentToIncreased = nodeToIncrease.getParent();
+
+            if (parentToIncreased != null && newKey > parentToIncreased.getKey()) {
+                cut(nodeToIncrease, parentToIncreased);
+                cascadingCut(parentToIncreased);
+            }
+            if (nodeToIncrease.getKey() > this.max.getKey()) {
+                this.max = nodeToIncrease;
+            }
+        }
 
     }
 
     /**
-     * Unites two fibonacci heaps into one.
+     * Helper method for increaseKey operation. Cut removes the node whose key
+     * was increased from the child list of its parent and places it in the root
+     * list of the heap.
      *
-     * Please note: implementation is not yet finished.
+     * @param increasedNode the node of which key was increased.
+     * @param parentNode the parent of the node of which key was increased.
+     */
+    public void cut(FibonacciNode increasedNode, FibonacciNode parentNode) {
+        // remove increased node from the child list of the parent node
+        if (increasedNode.getLeftSibling() == increasedNode) {
+            parentNode.setChild(null);
+        } else {
+            increasedNode.getLeftSibling().setRightSibling(increasedNode.getRightSibling());
+            increasedNode.getRightSibling().setLeftSibling(increasedNode.getLeftSibling());
+            increasedNode.getLeftSibling().setParent(parentNode);
+            parentNode.setChild(increasedNode.getLeftSibling());
+            parentNode.setDegree(parentNode.getDegree() - 1);
+        }
+        // add increased node to the root list of the heap
+        increasedNode.setRightSibling(this.max);
+        increasedNode.setLeftSibling(this.max.getLeftSibling());
+        increasedNode.getLeftSibling().setRightSibling(increasedNode);
+        this.max.setLeftSibling(increasedNode);
+
+        increasedNode.setParent(null);
+        increasedNode.setMark(false);
+    }
+
+    /**
+     * Second helper method for increaseKey operation. Cascade cut tracks if a
+     * node has had two children cut; in that case it proceeds to recursively go
+     * through the nodes parent nodes until it finds either a root or an
+     * unmarked node.
      *
-     * @param firstHeap the first heap to be united.
-     * @param secondHeap the second heap to be united.
+     * @param parentNode the parent node of the node to be cut.
+     */
+    public void cascadingCut(FibonacciNode parentNode) {
+        FibonacciNode parentOfParent = parentNode.getParent();
+        if (parentOfParent != null) {
+            if (parentNode.getMark() == false) {
+                parentNode.setMark(true);
+            } else {
+                cut(parentNode, parentOfParent);
+                cascadingCut(parentOfParent);
+            }
+        }
+    }
+
+    /**
+     * Unites two fibonacci heaps into one. The second one is first concatanated
+     * into the root list of this heap, and then max node is set according to
+     * which of the heaps has the larger maximum key value.
+     *
+     * @param otherHeap the heap to be united with this heap.
      * @return the united heap.
      */
-    public FibonacciHeap union(FibonacciHeap firstHeap, FibonacciHeap secondHeap) {
-        FibonacciHeap unitedHeap = this.makeFibonacciHeap();
-        unitedHeap.max = firstHeap.max;
-
-//        unitedHeap.getMax Node().setLeftSibling(secondHeap.getMaxNode());
-        if (firstHeap.getMaxNode() == null || (secondHeap.getMaxNode() != null
-                && secondHeap.returnMax() > firstHeap.returnMax())) {
-            unitedHeap.max = secondHeap.max;
+    public FibonacciHeap union(FibonacciHeap otherHeap) {
+        if (this.max == null) {
+            return otherHeap;
         }
 
-        unitedHeap.numberOfNodes = firstHeap.numberOfNodes + secondHeap.numberOfNodes;
+        if (otherHeap.getMaxNode() == null) {
+            return this;
+        }
+
+        FibonacciHeap unitedHeap = this.makeFibonacciHeap();
+        unitedHeap.setMaxNode(this.max);
+
+        FibonacciNode unitedMaxNode = unitedHeap.getMaxNode();
+        FibonacciNode currentLeftSiblingForMax = unitedHeap.getMaxNode().getLeftSibling();
+
+        unitedMaxNode.setLeftSibling(otherHeap.getMaxNode());
+        unitedMaxNode.getLeftSibling().setRightSibling(unitedHeap.getMaxNode());
+        unitedMaxNode.getLeftSibling().setLeftSibling(currentLeftSiblingForMax);
+
+        if (otherHeap.returnMax() > this.returnMax()) {
+            unitedHeap.setMaxNode(otherHeap.getMaxNode());
+        }
+
+        unitedHeap.setNumberOfNodes(this.getNumberOfNodes() + otherHeap.getNumberOfNodes());
 
         return unitedHeap;
+    }
+
+    /**
+     * Deletes the given node. This is accomplished by using the two existing
+     * Fibonacci heap methods.
+     *
+     * @param nodeToDelete the node to delete.
+     */
+    public void delete(FibonacciNode nodeToDelete) {
+        this.increaseKey(nodeToDelete, Integer.MAX_VALUE);
+        this.deleteMax();
     }
 
     /**
@@ -279,11 +369,29 @@ public class FibonacciHeap {
     }
 
     /**
-     * A helper getter for tests.
+     * Sets the current maximum node to the given node.
+     *
+     * @param max the new maximum node.
+     */
+    public void setMaxNode(FibonacciNode max) {
+        this.max = max;
+    }
+
+    /**
+     * Returns the number of nodes in the current heap.
      *
      * @return the number of nodes in the heap as type integer.
      */
     public int getNumberOfNodes() {
         return numberOfNodes;
+    }
+
+    /**
+     * Sets the number of nodes for the current heap to the given number.
+     *
+     * @param numberOfNodes the new number of nodes.
+     */
+    public void setNumberOfNodes(int numberOfNodes) {
+        this.numberOfNodes = numberOfNodes;
     }
 }
