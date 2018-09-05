@@ -7,7 +7,7 @@ package components;
  *
  * @author Mika Äärilä
  */
-public class BinomialHeap {
+public class BinomialHeap implements Heap {
 
     /**
      * The basic element of a binomial heap - a head node that provides links to
@@ -47,6 +47,7 @@ public class BinomialHeap {
      * @return the maximum value found after iterating through the current head
      * and its siblings i.e. the root list of the heap.
      */
+    @Override
     public int returnMax() {
         Node iteratingHead = this.head;
         int maxValue = Integer.MIN_VALUE;
@@ -69,6 +70,7 @@ public class BinomialHeap {
      *
      * @return the maximum value that was just deleted.
      */
+    @Override
     public int deleteMax() {
         if (this.head == null) {
             return Integer.MIN_VALUE;
@@ -113,6 +115,21 @@ public class BinomialHeap {
     }
 
     /**
+     * Inserts a new value into the heap. Insertion requires the heap to be
+     * rebuilt with the union method.
+     *
+     * @param newValue the value to be inserted into the heap.
+     */
+    @Override
+    public void insert(int newValue) {
+        Node newNode = new Node(newValue);
+        BinomialHeap newHeap = makeBinomialHeap();
+        newHeap.head = newNode;
+        BinomialHeap unitedHeap = this.union(newHeap);
+        this.head = unitedHeap.head;
+    }
+
+    /**
      * Increases the value of the key in the given node.
      *
      * @param nodeToIncrease the node containing the key to be increased.
@@ -131,20 +148,6 @@ public class BinomialHeap {
                 iteratingNode = iteratingNode.getParent();
             }
         }
-    }
-
-    /**
-     * Inserts a new value into the heap. Insertion requires the heap to be
-     * rebuilt with the union method.
-     *
-     * @param newValue the value to be inserted into the heap.
-     */
-    public void insert(int newValue) {
-        Node newNode = new Node(newValue);
-        BinomialHeap newHeap = makeBinomialHeap();
-        newHeap.head = newNode;
-        BinomialHeap unitedHeap = this.union(newHeap);
-        this.head = unitedHeap.head;
     }
 
     /**

@@ -7,7 +7,7 @@ package components;
  *
  * @author Mika Äärilä
  */
-public class BinaryHeap {
+public class BinaryHeap implements Heap {
 
     /**
      * The basic elements of a binary heap - a heap array representing the heap
@@ -63,6 +63,7 @@ public class BinaryHeap {
      *
      * @return the maximum value located on the first position of the array.
      */
+    @Override
     public int returnMax() {
         return this.heap[0];
     }
@@ -75,6 +76,7 @@ public class BinaryHeap {
      *
      * @return the maximum value that was just deleted.
      */
+    @Override
     public int deleteMax() {
         int maxValue = this.heap[0];
         this.heap[0] = this.heap[this.heapSize];
@@ -95,6 +97,7 @@ public class BinaryHeap {
      *
      * @param newValue the value to be inserted into the heap.
      */
+    @Override
     public void insert(int newValue) {
         this.heapSize++;
         if (this.heapSize >= this.heap.length) {

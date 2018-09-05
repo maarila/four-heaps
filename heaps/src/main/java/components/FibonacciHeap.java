@@ -7,7 +7,7 @@ package components;
  *
  * @author Mika Äärilä
  */
-public class FibonacciHeap {
+public class FibonacciHeap implements Heap {
 
     /**
      * The basic element of the fibonacci heap - the max node, which provides
@@ -44,6 +44,7 @@ public class FibonacciHeap {
      *
      * @param newValue the new value to be added.
      */
+    @Override
     public void insert(int newValue) {
         FibonacciNode newNode = new FibonacciNode(newValue);
         if (this.max == null) {
@@ -70,6 +71,7 @@ public class FibonacciHeap {
      *
      * @return the maximum key value of the heap.
      */
+    @Override
     public int returnMax() {
         return this.max == null ? Integer.MIN_VALUE : this.max.getKey();
     }
@@ -81,6 +83,7 @@ public class FibonacciHeap {
      *
      * @return the current maximum value as type integer.
      */
+    @Override
     public int deleteMax() {
         if (this.max == null) {
             return Integer.MIN_VALUE;

@@ -7,7 +7,7 @@ package components;
  *
  * @author Mika Äärilä
  */
-public class PairingHeap {
+public class PairingHeap implements Heap {
 
     /**
      * The basic element of a pairing heap - the root node that provides links
@@ -46,6 +46,7 @@ public class PairingHeap {
      *
      * @return the maximum value of the heap.
      */
+    @Override
     public int returnMax() {
         return this.root == null ? Integer.MIN_VALUE : this.root.getKey();
     }
@@ -57,6 +58,7 @@ public class PairingHeap {
      *
      * @return the maximum value of the heap.
      */
+    @Override
     public int deleteMax() {
         if (this.root == null) {
             return Integer.MIN_VALUE;
@@ -80,6 +82,7 @@ public class PairingHeap {
      *
      * @param newValue the value to be inserted into the heap.
      */
+    @Override
     public void insert(int newValue) {
         PairingNode newNode = new PairingNode(newValue);
         PairingNode meldedNode = this.meld(this.root, newNode);
