@@ -4,33 +4,47 @@ There are two ways to run the program.
 
 __Quick method:__
 
-1. Download the [four-heaps jar file](https://github.com/maarila/) from the repository to a desired location on your local machine. (TODO: Add a link to jar file.)
+1. Download the [four-heaps jar file](https://github.com/maarila/four-heaps/blob/master/four-heaps.jar) from the repository to a desired location on your local machine.
 
-2. Open Terminal window and run the downloaded file with the following command:
+2. Open a Terminal window, change directories to the download location and run the downloaded file:
 
 ```
-java -jar four-heaps.jar (TODO: Add/Confirm correct jar file name.)
+java -jar four-heaps.jar
 ```
 
 __Slow method:__
 
-1. Open the Terminal window and create (if necessary) a directory to which you wish to download the project, e.g. ~/coding/Java/. Change to that directory.
+1. Open a Terminal window and create (if necessary) a directory to which you wish to download the project, e.g. ~/coding/Java/.
 
 ```
 mkdir coding/Java
-cd coding/Java/
 ```
 
-2. Clone the project to your local machine.
+2. Change directories to the directory you created.
+
+```
+cd coding/Java
+```
+
+3. Clone the project to your local machine.
 
 ```
 git clone https://github.com/maarila/four-heaps.git
 ```
 
-3. Install [Gradle](https://gradle.org/install/) on your machine or make sure it is already properly installed.
+4. Install [Gradle](https://gradle.org/install/) on your machine or make sure it is already properly installed.
 
-4. Install Gradle plugin to Netbeans or make sure it is already properly installed (alternatively, make sure your preferred IDE supports Gradle projects). See Netbeans: Tools -> Plugins. Plugin name is Gradle Support.
+5. Run the program with:
 
-5. Open the project in Netbeans (or your preferred IDE).
+```
+gradle run
+```
 
-6. Run the program: Run -> Run Project or shortcut key F6.
+or alternatively:
+
+6. Install Gradle plugin to Netbeans or make sure it is already properly installed (alternatively, make sure your preferred IDE supports Gradle projects). See Netbeans: Tools -> Plugins. Plugin name is Gradle Support.
+
+7. Open the project in Netbeans (or your preferred IDE).
+
+8. Run the program from inside Netbeans: Run -> Run Project or shortcut key F6.
+
