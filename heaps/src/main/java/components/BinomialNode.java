@@ -6,7 +6,7 @@ package components;
  *
  * @author Mika Äärilä
  */
-public class Node {
+public class BinomialNode {
 
     /**
      * The properties of node include links to its parent node, child node and
@@ -15,9 +15,9 @@ public class Node {
      * log n.
      */
     private int key;
-    private Node parent;
-    private Node leftmostChild;
-    private Node siblingToTheRight;
+    private BinomialNode parent;
+    private BinomialNode leftmostChild;
+    private BinomialNode siblingToTheRight;
     private int degree;
 
     /**
@@ -25,7 +25,7 @@ public class Node {
      *
      * @param key the value of node's key property.
      */
-    public Node(int key) {
+    public BinomialNode(int key) {
         this.key = key;
         this.parent = null;
         this.leftmostChild = null;
@@ -56,7 +56,7 @@ public class Node {
      *
      * @return the parent node.
      */
-    public Node getParent() {
+    public BinomialNode getParent() {
         return parent;
     }
 
@@ -65,7 +65,7 @@ public class Node {
      *
      * @param parent the new parent node.
      */
-    public void setParent(Node parent) {
+    public void setParent(BinomialNode parent) {
         this.parent = parent;
     }
 
@@ -74,7 +74,7 @@ public class Node {
      *
      * @return the child node.
      */
-    public Node getLeftmostChild() {
+    public BinomialNode getLeftmostChild() {
         return leftmostChild;
     }
 
@@ -83,7 +83,7 @@ public class Node {
      *
      * @param leftmostChild the new child node.
      */
-    public void setLeftmostChild(Node leftmostChild) {
+    public void setLeftmostChild(BinomialNode leftmostChild) {
         this.leftmostChild = leftmostChild;
     }
 
@@ -92,7 +92,7 @@ public class Node {
      *
      * @return the sibling node.
      */
-    public Node getSiblingToTheRight() {
+    public BinomialNode getSiblingToTheRight() {
         return siblingToTheRight;
     }
 
@@ -101,7 +101,7 @@ public class Node {
      *
      * @param siblingToTheRight the new sibling node.
      */
-    public void setSiblingToTheRight(Node siblingToTheRight) {
+    public void setSiblingToTheRight(BinomialNode siblingToTheRight) {
         this.siblingToTheRight = siblingToTheRight;
     }
 

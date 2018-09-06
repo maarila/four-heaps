@@ -4,16 +4,16 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class NodeTest {
+public class BinomialNodeTest {
 
-    private Node node;
+    private BinomialNode node;
 
-    public NodeTest() {
+    public BinomialNodeTest() {
     }
 
     @Before
     public void setUp() {
-        this.node = new Node(10);
+        this.node = new BinomialNode(10);
     }
 
     @Test
@@ -49,51 +49,51 @@ public class NodeTest {
 
     @Test
     public void setParentSetsParentCorrectlyWhenParentPreviouslyNull() {
-        Node parentNode = new Node(100);
+        BinomialNode parentNode = new BinomialNode(100);
         this.node.setParent(parentNode);
         assertEquals(100, this.node.getParent().getKey());
     }
 
     @Test
     public void setParentSetsParentCorrectlyWhenParentAlreadyExists() {
-        Node firstParentNode = new Node(100);
+        BinomialNode firstParentNode = new BinomialNode(100);
         this.node.setParent(firstParentNode);
         assertEquals(100, this.node.getParent().getKey());
-        Node secondParentNode = new Node(250);
+        BinomialNode secondParentNode = new BinomialNode(250);
         this.node.setParent(secondParentNode);
         assertEquals(250, this.node.getParent().getKey());
     }
 
     @Test
     public void setLeftMostChildSetsChildCorrectlyWhenChildPreviouslyNull() {
-        Node childNode = new Node(100);
+        BinomialNode childNode = new BinomialNode(100);
         this.node.setLeftmostChild(childNode);
         assertEquals(100, this.node.getLeftmostChild().getKey());
     }
 
     @Test
     public void setLeftmostChildSetsChildCorrectlyWhenChildAlreadyExists() {
-        Node firstChildNode = new Node(100);
+        BinomialNode firstChildNode = new BinomialNode(100);
         this.node.setLeftmostChild(firstChildNode);
         assertEquals(100, this.node.getLeftmostChild().getKey());
-        Node secondChildNode = new Node(250);
+        BinomialNode secondChildNode = new BinomialNode(250);
         this.node.setLeftmostChild(secondChildNode);
         assertEquals(250, this.node.getLeftmostChild().getKey());
     }
 
     @Test
     public void setSiblingToTheRightSetsSiblingCorrectlyWhenSiblingPreviouslyNull() {
-        Node siblingNode = new Node(100);
+        BinomialNode siblingNode = new BinomialNode(100);
         this.node.setSiblingToTheRight(siblingNode);
         assertEquals(100, this.node.getSiblingToTheRight().getKey());
     }
 
     @Test
     public void setSiblingToTheRightSetsSiblingCorrectlyWhenSiblingAlreadyExists() {
-        Node firstSiblingNode = new Node(100);
+        BinomialNode firstSiblingNode = new BinomialNode(100);
         this.node.setSiblingToTheRight(firstSiblingNode);
         assertEquals(100, this.node.getSiblingToTheRight().getKey());
-        Node secondSiblingNode = new Node(250);
+        BinomialNode secondSiblingNode = new BinomialNode(250);
         this.node.setSiblingToTheRight(secondSiblingNode);
         assertEquals(250, this.node.getSiblingToTheRight().getKey());
     }

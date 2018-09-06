@@ -14,7 +14,7 @@ public class BinomialHeap implements Heap {
      * its parent, child and sibling. In addition, head maintains its key value
      * and its degree.
      */
-    private Node head;
+    private BinomialNode head;
 
     /**
      * Constructor for the binomial heap. At the start, the head is set to null.
@@ -37,7 +37,7 @@ public class BinomialHeap implements Heap {
      *
      * @return the head node.
      */
-    public Node getHead() {
+    public BinomialNode getHead() {
         return head;
     }
 
@@ -49,7 +49,7 @@ public class BinomialHeap implements Heap {
      */
     @Override
     public int returnMax() {
-        Node iteratingHead = this.head;
+        BinomialNode iteratingHead = this.head;
         int maxValue = Integer.MIN_VALUE;
 
         while (iteratingHead != null) {
@@ -76,10 +76,10 @@ public class BinomialHeap implements Heap {
             return Integer.MIN_VALUE;
         }
 
-        Node maxHead = this.head;
-        Node iteratingHead = maxHead.getSiblingToTheRight();
-        Node previousToMax = null;
-        Node previousToIterator = maxHead;
+        BinomialNode maxHead = this.head;
+        BinomialNode iteratingHead = maxHead.getSiblingToTheRight();
+        BinomialNode previousToMax = null;
+        BinomialNode previousToIterator = maxHead;
 
         while (iteratingHead != null) {
             if (iteratingHead.getKey() > maxHead.getKey()) {
@@ -102,7 +102,7 @@ public class BinomialHeap implements Heap {
         maxHead = maxHead.getLeftmostChild();
 
         while (maxHead != null) {
-            Node sibling = maxHead.getSiblingToTheRight();
+            BinomialNode sibling = maxHead.getSiblingToTheRight();
             maxHead.setSiblingToTheRight(newHeap.head);
             newHeap.head = maxHead;
             maxHead = sibling;
@@ -122,7 +122,7 @@ public class BinomialHeap implements Heap {
      */
     @Override
     public void insert(int newValue) {
-        Node newNode = new Node(newValue);
+        BinomialNode newNode = new BinomialNode(newValue);
         BinomialHeap newHeap = makeBinomialHeap();
         newHeap.head = newNode;
         BinomialHeap unitedHeap = this.union(newHeap);
@@ -135,10 +135,10 @@ public class BinomialHeap implements Heap {
      * @param nodeToIncrease the node containing the key to be increased.
      * @param newKey the new value of the key.
      */
-    public void increaseKey(Node nodeToIncrease, int newKey) {
+    public void increaseKey(BinomialNode nodeToIncrease, int newKey) {
         if (newKey > nodeToIncrease.getKey()) {
             nodeToIncrease.setKey(newKey);
-            Node iteratingNode = nodeToIncrease;
+            BinomialNode iteratingNode = nodeToIncrease;
 
             while (iteratingNode.getParent() != null
                     && iteratingNode.getParent().getKey() < iteratingNode.getKey()) {
@@ -169,9 +169,9 @@ public class BinomialHeap implements Heap {
             return unitedHeap;
         }
 
-        Node previousNode = null;
-        Node currentNode = unitedHeap.head;
-        Node nextNode = unitedHeap.head.getSiblingToTheRight();
+        BinomialNode previousNode = null;
+        BinomialNode currentNode = unitedHeap.head;
+        BinomialNode nextNode = unitedHeap.head.getSiblingToTheRight();
 
         while (nextNode != null) {
             if (currentNode.getDegree() != nextNode.getDegree() || (nextNode.getSiblingToTheRight() != null
@@ -206,7 +206,7 @@ public class BinomialHeap implements Heap {
      * @param firstNode the first node to be linked.
      * @param secondNode the second node to be linked.
      */
-    public void link(Node firstNode, Node secondNode) {
+    public void link(BinomialNode firstNode, BinomialNode secondNode) {
         firstNode.setParent(secondNode);
         firstNode.setSiblingToTheRight(secondNode.getLeftmostChild());
         secondNode.setLeftmostChild(firstNode);
@@ -222,7 +222,7 @@ public class BinomialHeap implements Heap {
      * @param secondHeap the second heap to be merged.
      * @return the merged heap.
      */
-    public Node merge(BinomialHeap firstHeap, BinomialHeap secondHeap) {
+    public BinomialNode merge(BinomialHeap firstHeap, BinomialHeap secondHeap) {
         if (firstHeap.head == null) {
             return secondHeap.head;
         }
@@ -231,9 +231,9 @@ public class BinomialHeap implements Heap {
             return firstHeap.head;
         }
 
-        Node headOfFirst = firstHeap.head;
-        Node headOfSecond = secondHeap.head;
-        Node helperHead;
+        BinomialNode headOfFirst = firstHeap.head;
+        BinomialNode headOfSecond = secondHeap.head;
+        BinomialNode helperHead;
 
         if (headOfFirst.getDegree() > headOfSecond.getDegree()) {
             firstHeap.head = headOfSecond;

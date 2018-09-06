@@ -79,7 +79,7 @@ public class BinomialHeapTest {
     @Test
     public void insertingSmallerValueAsSecondNodeMakesSaidNodeChildNode() {
         this.heap.insert(100);
-        Node currentHead = this.heap.getHead();
+        BinomialNode currentHead = this.heap.getHead();
         assertEquals(null, currentHead.getLeftmostChild());
         this.heap.insert(50);
         assertEquals(50, currentHead.getLeftmostChild().getKey());
@@ -89,7 +89,7 @@ public class BinomialHeapTest {
     public void insertingAThirdValueMakesSaidNodeNewHeadNode() {
         this.heap.insert(100);
         this.heap.insert(50);
-        Node currentHead = this.heap.getHead();
+        BinomialNode currentHead = this.heap.getHead();
         assertEquals(null, currentHead.getSiblingToTheRight());
         this.heap.insert(75);
         currentHead = this.heap.getHead();
@@ -100,7 +100,7 @@ public class BinomialHeapTest {
     public void insertingAThirdValueMakesSaidNodeHeadNodeThatHasPreviousHeadAsSibling() {
         this.heap.insert(100);
         this.heap.insert(50);
-        Node currentHead = this.heap.getHead();
+        BinomialNode currentHead = this.heap.getHead();
         assertEquals(100, currentHead.getKey());
         this.heap.insert(75);
         currentHead = this.heap.getHead();
@@ -158,9 +158,9 @@ public class BinomialHeapTest {
     @Test
     public void mergeReturnsFirstHeapsHeadIfSecondHeapHeadIsNull() {
         this.heap.insert(10);
-        Node firstHeapHead = this.heap.getHead();
+        BinomialNode firstHeapHead = this.heap.getHead();
         BinomialHeap emptyHeap = new BinomialHeap();
-        Node mergedHead = this.heap.merge(this.heap, emptyHeap);
+        BinomialNode mergedHead = this.heap.merge(this.heap, emptyHeap);
         assertEquals(firstHeapHead.getKey(), mergedHead.getKey());
     }
 
@@ -193,7 +193,7 @@ public class BinomialHeapTest {
     @Test
     public void increaseKeyDoesNothingIfNewKeyIsSmallerThanExistingKey() {
         this.heap.insert(100);
-        Node currentHead = this.heap.getHead();
+        BinomialNode currentHead = this.heap.getHead();
         this.heap.increaseKey(currentHead, 50);
         assertEquals(100, currentHead.getKey());
     }
@@ -201,7 +201,7 @@ public class BinomialHeapTest {
     @Test
     public void increaseKeyDoesNothingIfNewKeyIsEqualToExistingKey() {
         this.heap.insert(100);
-        Node currentHead = this.heap.getHead();
+        BinomialNode currentHead = this.heap.getHead();
         this.heap.increaseKey(currentHead, 100);
         assertEquals(100, currentHead.getKey());
     }
@@ -209,7 +209,7 @@ public class BinomialHeapTest {
     @Test
     public void increaseKeyWorksCorrectlyGivenCorrectValue() {
         this.heap.insert(100);
-        Node currentHead = this.heap.getHead();
+        BinomialNode currentHead = this.heap.getHead();
         this.heap.increaseKey(currentHead, 150);
         assertEquals(150, currentHead.getKey());
     }
@@ -218,7 +218,7 @@ public class BinomialHeapTest {
     public void increaseKeyMakesIncreasedKeyNewMaximumGivenCorrectValue() {
         this.heap.insert(100);
         this.heap.insert(50);
-        Node currentChild = this.heap.getHead().getLeftmostChild();
+        BinomialNode currentChild = this.heap.getHead().getLeftmostChild();
         this.heap.increaseKey(currentChild, 150);
         assertEquals(150, this.heap.returnMax());
     }
@@ -230,7 +230,7 @@ public class BinomialHeapTest {
         this.heap.insert(50);
         this.heap.insert(40);
         assertEquals(50, this.heap.getHead().getLeftmostChild().getKey());
-        Node leftMostChild = this.heap.getHead().getLeftmostChild().getLeftmostChild();
+        BinomialNode leftMostChild = this.heap.getHead().getLeftmostChild().getLeftmostChild();
         this.heap.increaseKey(leftMostChild, 60);
         assertEquals(60, this.heap.getHead().getLeftmostChild().getKey());        
     }
