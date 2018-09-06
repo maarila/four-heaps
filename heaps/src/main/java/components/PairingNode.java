@@ -1,7 +1,7 @@
 package components;
 
 /**
- * This class provides the node needed for the proper functioning of the pairing
+ * Provides the node needed for the proper functioning of the pairing
  * heap.
  *
  * @author Mika Äärilä

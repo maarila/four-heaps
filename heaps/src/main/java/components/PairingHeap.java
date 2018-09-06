@@ -1,7 +1,7 @@
 package components;
 
 /**
- * This class provides the basic implementation of a maximum pairing heap. It
+ * Provides the basic implementation of a maximum pairing heap. It
  * contains the typical methods expected from a maximum heap - insertion,
  * returning the maximum value, deleting maximum and increasing key.
  *

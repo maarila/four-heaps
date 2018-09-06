@@ -1,7 +1,7 @@
 package components;
 
 /**
- * This class provides the node needed for the proper functioning of the
+ * Provides the node needed for the proper functioning of the
  * Fibonacci heap.
  *
  * @author Mika Äärilä

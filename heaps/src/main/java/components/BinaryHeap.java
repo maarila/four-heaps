@@ -1,7 +1,7 @@
 package components;
 
 /**
- * This class provides the basic implementation of a binary heap. It contains
+ * Provides the basic implementation of a binary heap. It contains
  * the typical methods expected from a maximum heap - insertion, returning the
  * maximum value, deleting maximum value and increasing key.
  *
