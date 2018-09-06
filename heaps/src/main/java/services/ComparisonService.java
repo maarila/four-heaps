@@ -43,7 +43,7 @@ public class ComparisonService {
     }
 
     public void binaryHeapInsert(int numberOfTimes) {
-        BinaryHeap binaryHeap = new BinaryHeap(numberOfTimes);
+        BinaryHeap binaryHeap = new BinaryHeap(16);
         long average = insert(binaryHeap, numberOfTimes);
         System.out.println("Binary heap insert: average " + average + " milliseconds.");
     }
@@ -67,7 +67,7 @@ public class ComparisonService {
     }
 
     public void binaryHeapReturnMax(int numberOfTimes) {
-        BinaryHeap binaryHeap = new BinaryHeap(numberOfTimes);
+        BinaryHeap binaryHeap = new BinaryHeap(16);
         long average = returnMax(binaryHeap, numberOfTimes);
         System.out.println("Binary heap return-max: average " + average + " milliseconds.");
     }
@@ -91,7 +91,7 @@ public class ComparisonService {
     }
 
     public void binaryHeapDeleteMax(int numberOfTimes) {
-        BinaryHeap binaryHeap = new BinaryHeap(numberOfTimes + 1000);
+        BinaryHeap binaryHeap = new BinaryHeap(16);
         long average = deleteMax(binaryHeap, numberOfTimes);
         System.out.println("Binary heap delete-max: average " + average + " milliseconds.");
     }
