@@ -79,7 +79,7 @@ public class BinaryHeap implements Heap {
     @Override
     public int deleteMax() {
         int maxValue = this.heap[0];
-        this.heap[0] = this.heap[this.heapSize];
+        this.heap[0] = this.heap[this.heapSize - 1];
         this.heapSize--;
         heapify(this.heap, 0);
 
