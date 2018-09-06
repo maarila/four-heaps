@@ -1,9 +1,9 @@
 package components;
 
 /**
- * This class provides the basic implementation of a binary heap. It will be
- * used as a point of comparison for other more uncommon implementations of the
- * heap data structure.
+ * This class provides the basic implementation of a binary heap. It contains
+ * the typical methods expected from a maximum heap - insertion, returning the
+ * maximum value, deleting maximum value and increasing key.
  *
  * @author Mika Äärilä
  */
@@ -11,7 +11,8 @@ public class BinaryHeap implements Heap {
 
     /**
      * The basic elements of a binary heap - a heap array representing the heap
-     * and a heapSize pointer pointing at the end of heap.
+     * and a heapSize pointer pointing at the end of heap. Starting size
+     * variable is used as a helper when decreasing the size of the heap.
      */
     private int[] heap;
     private int heapSize;
@@ -74,7 +75,7 @@ public class BinaryHeap implements Heap {
      * the heapify operation. After deletion, if the size of the heap is double
      * or more compared to heapSize, the size of the heap is halved.
      *
-     * @return the maximum value that was just deleted.
+     * @return the maximum value that was deleted.
      */
     @Override
     public int deleteMax() {
@@ -127,17 +128,17 @@ public class BinaryHeap implements Heap {
         int largest = 0;
 
         while (index <= this.heapSize) {
-            int l = leftChild(index);
-            int r = rightChild(index);
+            int leftChild = leftChild(index);
+            int rightChild = rightChild(index);
 
-            if (l <= this.heapSize && heap[l] > heap[index]) {
-                largest = l;
+            if (leftChild <= this.heapSize && heap[leftChild] > heap[index]) {
+                largest = leftChild;
             } else {
                 largest = index;
             }
 
-            if (r <= this.heapSize && heap[r] > heap[largest]) {
-                largest = r;
+            if (rightChild <= this.heapSize && heap[rightChild] > heap[largest]) {
+                largest = rightChild;
             }
 
             if (largest == index) {
@@ -252,6 +253,12 @@ public class BinaryHeap implements Heap {
         return heapSize;
     }
 
+    /**
+     * Find the index of the heap node with the given value.
+     * 
+     * @param keyValue the value of the key to be found.
+     * @return the index of the node.
+     */
     public int indexOf(int keyValue) {
         int index = -1;
         for (int i = 0; i < this.heapSize; i++) {

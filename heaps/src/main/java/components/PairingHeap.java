@@ -53,7 +53,7 @@ public class PairingHeap implements Heap {
 
     /**
      * Deletes the maximum value of the heap and returns it. After deletion, all
-     * the remaining nodes need to built into a new heap via the linkSiblings
+     * the remaining nodes need to be built into a new heap via the linkSiblings
      * operation.
      *
      * @return the maximum value of the heap.
@@ -91,7 +91,7 @@ public class PairingHeap implements Heap {
 
     /**
      * Melds two roots into one. The root that has the larger key will become
-     * the new root. The other will become a subroot to said root.
+     * the new root. The other will become a subroot to the new root.
      *
      * @param firstRoot first root to be melded.
      * @param secondRoot second root to melded.
@@ -153,7 +153,7 @@ public class PairingHeap implements Heap {
      * pair (or individual root) formed on the first pass.
      *
      * @param startingNode the node from which the linking starts.
-     * @return the new node satisfies the heap condition.
+     * @return the new node that satisfies the heap condition.
      */
     public PairingNode linkSiblings(PairingNode startingNode) {
         if (startingNode.getRightSibling() == null) {
@@ -198,7 +198,7 @@ public class PairingHeap implements Heap {
     }
 
     /**
-     * Increase the key value of the given node.
+     * Increases the key value of the given node.
      *
      * @param nodeToIncrease the node of which key is to be increased.
      * @param newKey the new value of the key.

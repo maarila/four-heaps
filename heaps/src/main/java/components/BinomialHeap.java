@@ -68,7 +68,7 @@ public class BinomialHeap implements Heap {
      * Before returning the maximum value, the method also reorganises the heap
      * should it prove necessary.
      *
-     * @return the maximum value that was just deleted.
+     * @return the maximum value that was deleted.
      */
     @Override
     public int deleteMax() {

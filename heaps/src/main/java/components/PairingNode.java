@@ -2,18 +2,16 @@ package components;
 
 /**
  * This class provides the node needed for the proper functioning of the pairing
- * heap. This node implementation is similar to that of the binomial heap, but 
- * pairing node has no parent node nor a degree property and it also has links
- * to both its siblings.
+ * heap.
  *
  * @author Mika Äärilä
  */
 public class PairingNode {
 
     /**
-     * The properties of pairing node include links to its leftmost child node, 
-     * and both left and right sibling nodes. The leftmost child node uses its 
-     * left pointer to sibling to link to its parent. In addition, pairing node 
+     * The properties of pairing node include links to its leftmost child node,
+     * and to its left and right sibling nodes. The leftmost child node uses its
+     * left pointer to sibling to link to its parent. In addition, pairing node
      * holds the information regarding the node's key value.
      */
     private int key;

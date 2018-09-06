@@ -1,7 +1,7 @@
 package components;
 
 /**
- * This class provides the basic implementation of a maximum fibonacci heap. It
+ * This class provides the basic implementation of a maximum Fibonacci heap. It
  * contains the typical methods expected from a maximum heap - insertion,
  * returning the maximum value, deleting maximum value and increasing key.
  *
@@ -10,7 +10,7 @@ package components;
 public class FibonacciHeap implements Heap {
 
     /**
-     * The basic element of the fibonacci heap - the max node, which provides
+     * The basic element of the Fibonacci heap - the max node, which provides
      * links to its siblings, parent and child, as well contains the weight of
      * the node among other information. The property 'numberOfNodes' tracks the
      * number of nodes belonging to the heap.
@@ -19,8 +19,8 @@ public class FibonacciHeap implements Heap {
     int numberOfNodes;
 
     /**
-     * Constructor for the fibonacci heap. At the start, the max node is set to
-     * null and the number of nodes to zero.
+     * Constructor for the Fibonacci heap. At the start, the max node is set to
+     * null and the number of nodes is set to zero.
      */
     public FibonacciHeap() {
         this.max = null;
@@ -28,17 +28,17 @@ public class FibonacciHeap implements Heap {
     }
 
     /**
-     * Creates and returns a new fibonacci heap with maximum node set to null.
+     * Creates and returns a new Fibonacci heap with maximum node set to null.
      *
-     * @return a new fibonacci heap.
+     * @return a new Fibonacci heap.
      */
     public FibonacciHeap makeFibonacciHeap() {
         return new FibonacciHeap();
     }
 
     /**
-     * Inserts a new value into the heap. If the value is smaller than the
-     * current maximum value, the new node becomes simply a sibling to the
+     * Inserts a new node into the heap. If the nodes's value is smaller than
+     * the current maximum value, the new node becomes simply a sibling to the
      * current maximum node. Otherwise, it becomes a sibling and the new maximum
      * node.
      *
@@ -47,6 +47,7 @@ public class FibonacciHeap implements Heap {
     @Override
     public void insert(int newValue) {
         FibonacciNode newNode = new FibonacciNode(newValue);
+
         if (this.max == null) {
             this.max = newNode;
             this.max.setLeftSibling(this.max);
@@ -140,10 +141,6 @@ public class FibonacciHeap implements Heap {
      * key value becomes the new max node.
      */
     public void consolidate() {
-        if (this.max == null) {
-            return;
-        }
-
         // calculate the upper bound on the degree of any node
         double goldenRatio = (1 + Math.sqrt(5)) / 2;
         int maxDegree = (int) Math.floor(Math.log(numberOfNodes) / Math.log(goldenRatio)) + 1;
@@ -217,8 +214,8 @@ public class FibonacciHeap implements Heap {
      * Links the two given nodes. First, the first given node is removed from
      * the root list and then made into a child of the second node.
      *
-     * @param firstNode the first node to be linked
-     * @param secondNode the second node to be linked
+     * @param firstNode the first node to be linked.
+     * @param secondNode the second node to be linked.
      */
     public void link(FibonacciNode firstNode, FibonacciNode secondNode) {
         FibonacciNode firstNodesLeft = firstNode.getLeftSibling();
@@ -247,8 +244,8 @@ public class FibonacciHeap implements Heap {
     /**
      * Increase the key value of the given node.
      *
-     * @param nodeToIncrease the node of which value is to be increased
-     * @param newKey the new key value of the node
+     * @param nodeToIncrease the node of which value is to be increased.
+     * @param newKey the new key value of the node.
      */
     public void increaseKey(FibonacciNode nodeToIncrease, int newKey) {
         if (newKey > nodeToIncrease.getKey()) {
@@ -263,7 +260,6 @@ public class FibonacciHeap implements Heap {
                 this.max = nodeToIncrease;
             }
         }
-
     }
 
     /**
@@ -285,6 +281,7 @@ public class FibonacciHeap implements Heap {
             parentNode.setChild(increasedNode.getLeftSibling());
             parentNode.setDegree(parentNode.getDegree() - 1);
         }
+
         // add increased node to the root list of the heap
         increasedNode.setRightSibling(this.max);
         increasedNode.setLeftSibling(this.max.getLeftSibling());
@@ -297,7 +294,7 @@ public class FibonacciHeap implements Heap {
 
     /**
      * Second helper method for increaseKey operation. Cascade cut tracks if a
-     * node has had two children cut; in that case it proceeds to recursively go
+     * node has had two children cut; in that case it proceeds to go recursively
      * through the nodes parent nodes until it finds either a root or an
      * unmarked node.
      *
@@ -316,9 +313,9 @@ public class FibonacciHeap implements Heap {
     }
 
     /**
-     * Unites two fibonacci heaps into one. The second one is first concatanated
-     * into the root list of this heap, and then max node is set according to
-     * which of the heaps has the larger maximum key value.
+     * Unites two Fibonacci heaps into one. The second one is first concatenated
+     * into the root list of this heap, and then the max node is set according
+     * to which of the heaps has the larger maximum key value.
      *
      * @param otherHeap the heap to be united with this heap.
      * @return the united heap.
