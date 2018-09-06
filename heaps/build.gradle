@@ -19,6 +19,14 @@ run {
     standardInput = System.in
 }
 
+jar {
+    manifest {
+        attributes(
+            'Main-Class': 'heaps.Main'
+        )
+    }
+}
+
 jacocoTestReport {
     reports {
         xml.enabled = true
