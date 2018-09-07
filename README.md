@@ -10,7 +10,6 @@ __Documentation:__
 * [Project Report](https://github.com/maarila/four-heaps/blob/master/documentation/ProjectReport.md)
 * [Testing Report](https://github.com/maarila/four-heaps/blob/master/documentation/TestingReport.md)
 * [User Guide](https://github.com/maarila/four-heaps/blob/master/documentation/UserGuide.md)
-* [JavaDocs](https://github.com/maarila/four-heaps/blob/master/javadoc/index.html)
 
 __Weekly reports:__
 
