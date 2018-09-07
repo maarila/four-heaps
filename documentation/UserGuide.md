@@ -42,7 +42,7 @@ gradle run
 
 or alternatively:
 
-6. Install Gradle plugin to Netbeans or make sure it is already properly installed (alternatively, make sure your preferred IDE supports Gradle projects). See Netbeans: Tools -> Plugins. Plugin name is Gradle Support.
+6. Install Gradle plugin for Netbeans or make sure it is already properly installed (alternatively, make sure your preferred IDE supports Gradle projects). See Netbeans: Tools -> Plugins. Plugin name is Gradle Support.
 
 7. Open the project in Netbeans (or your preferred IDE).
 
